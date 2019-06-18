@@ -1,0 +1,78 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="d3/d3.js"></script>
+
+<style type="text/css">
+.trialDiv{
+	display: none;
+	border: 1px solid grey;
+	border-color: read;
+	border-width: 1px;
+	padding-left: 20px;
+	width: 1000px;
+	margin: 0 auto;
+}
+#instructions{
+	border: 1px solid grey;
+	padding-left: 20px;
+	width: 500px;
+	margin: 0 auto;
+	font-family: Helvetica;
+	font-size: 20pt;
+}
+</style>
+
+
+<div id = "instructions">
+<p>
+Remember the pictures on the screen.
+Report whether the re-appeared picture
+is old or new after a short delay with
+scrambled images.</br></p>
+</br>
+<b>old = k</b></br>
+<b>new = j</b></br>
+</br>
+<p>Press any key to start.</p>
+<a href="#" id="startExperiment">Start Experiment</a>
+</div>
+
+<script>
+	d3.csv("./sub_file/sub10.csv").then(function(data) {
+	  console.log(data);
+	});
+</script>
+
+
+<div id="testtrial1" class="trialDiv">
+<p><img src="stimuli/scrambled.jpg"  width="100"></p>
+<p><input type="radio" class="responseButton" name="question2" value="-1"> smaller </p>
+<p><input type="radio" class="responseButton" name="question2" value="1"> bigger </p>
+</div> 
+
+
+<div id="testtrial2" class="trialDiv">
+<p><img src="http://timbrady.org/turk/images/car.jpg" width="100"></p>
+<p><input type="radio" class="responseButton" name="question4" value="-1"> smaller </p>
+<p><input type="radio" class="responseButton" name="question4" value="1"> bigger </p>
+</div> 
+
+<script>
+var curTrial = 1;
+
+function buttonClicked() {
+	$('#testtrial'+curTrial).hide();
+	curTrial++;
+	$('#testtrial'+curTrial).show();
+}
+
+function showFirstTrial(){
+	$('#testtrial1').show();
+	$('#instructions').hide();
+}
+
+$(document).ready(function(){
+	$('#startExperiment').click(showFirstTrial);
+	$('.responseButton').click(buttonClicked);
+});
+
+</script>

@@ -1,0 +1,40 @@
+scenes_A = ["stimuli/scene/pairs/A1.jpg", "stimuli/scene/pairs/A2.jpg", 
+	"stimuli/scene/pairs/A3.jpg", "stimuli/scene/pairs/A4.jpg", 
+	"stimuli/scene/pairs/A5.jpg", "stimuli/scene/pairs/A6.jpg", 
+	"stimuli/scene/pairs/A7.jpg", "stimuli/scene/pairs/A8.jpg", 
+	"stimuli/scene/pairs/A9.jpg", "stimuli/scene/pairs/A10.jpg", 
+	"stimuli/scene/pairs/A11.jpg", "stimuli/scene/pairs/A12.jpg", 
+	"stimuli/scene/pairs/A13.jpg","stimuli/scene/pairs/A14.jpg",
+	"stimuli/scene/pairs/A15.jpg","stimuli/scene/pairs/A16.jpg",
+	"stimuli/scene/pairs/A17.jpg","stimuli/scene/pairs/A18.jpg"]
+
+scenes_B = ["stimuli/scene/pairs/B1.jpg", "stimuli/scene/pairs/B2.jpg", 
+	"stimuli/scene/pairs/B3.jpg", "stimuli/scene/pairs/B4.jpg", 
+	"stimuli/scene/pairs/B5.jpg", "stimuli/scene/pairs/B6.jpg", 
+	"stimuli/scene/pairs/B7.jpg", "stimuli/scene/pairs/B8.jpg", 
+	"stimuli/scene/pairs/B9.jpg", "stimuli/scene/pairs/B10.jpg", 
+	"stimuli/scene/pairs/B11.jpg", "stimuli/scene/pairs/B12.jpg", 
+	"stimuli/scene/pairs/B13.jpg","stimuli/scene/pairs/B14.jpg",
+	"stimuli/scene/pairs/B15.jpg","stimuli/scene/pairs/B16.jpg",
+	"stimuli/scene/pairs/B17.jpg","stimuli/scene/pairs/B18.jpg"]
+
+lures = ["stimuli/scene/lures/1.jpg", "stimuli/scene/lures/2.jpg", 
+	"stimuli/scene/lures/3.jpg", "stimuli/scene/lures/4.jpg", 
+	"stimuli/scene/lures/5.jpg", "stimuli/scene/lures/6.jpg", 
+	"stimuli/scene/lures/7.jpg", "stimuli/scene/lures/8.jpg", 
+	"stimuli/scene/lures/9.jpg", "stimuli/scene/lures/10.jpg", 
+	"stimuli/scene/lures/11.jpg", "stimuli/scene/lures/12.jpg", 
+	"stimuli/scene/lures/13.jpg", "stimuli/scene/lures/14.jpg", 
+	"stimuli/scene/lures/15.jpg", "stimuli/scene/lures/16.jpg", 
+	"stimuli/scene/lures/17.jpg", "stimuli/scene/lures/18.jpg", 
+	"stimuli/scene/lures/19.jpg", "stimuli/scene/lures/20.jpg", 
+	"stimuli/scene/lures/21.jpg", "stimuli/scene/lures/22.jpg", 
+	"stimuli/scene/lures/23.jpg", "stimuli/scene/lures/24.jpg", 
+	"stimuli/scene/lures/25.jpg", "stimuli/scene/lures/26.jpg", 
+	"stimuli/scene/lures/27.jpg", "stimuli/scene/lures/28.jpg", 
+	"stimuli/scene/lures/29.jpg", "stimuli/scene/lures/30.jpg", 
+	"stimuli/scene/lures/31.jpg", "stimuli/scene/lures/32.jpg", 
+	"stimuli/scene/lures/33.jpg", "stimuli/scene/lures/34.jpg", 
+	"stimuli/scene/lures/35.jpg", "stimuli/scene/lures/36.jpg"]
+
+num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
