@@ -41,85 +41,6 @@
 }
 </style>
 
-<script>
-function showDemo(){
-	$('#demographic').show();
-	$('#welcome').hide();
-}
-function showInstructions(){
-	$('#instructions').show();
-	$('#demographic').hide();
-}
-
-function pressedSame(){
-	//$('#t' + currentTrial + 'response').val('j');
-	alert('same');
-	NextTrial();
-
-}
-
-function pressedDiff(){
-	//$('#t' + currentTrial + 'response').val('k');
-	alert('diff');
-	NextTrial();
-}
-
-
-function experiment(){
-
-	$('#instructions').hide();
-	$('#fixation').show();
-
-	d3.csv("./sub_file/sub01.csv").then(function(data) {
-			document.getElementById('img1_1').src = data[0].first_pic;
-			document.getElementById('img1_'+data[0].locy1).src = data[0].lure1;
-			document.getElementById('img1_'+data[0].locy2).src = data[0].lure2;
-
-			document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
-			document.getElementById('img2_'+data[0].locy1).src = "stimuli/scrambled.jpg";
-			document.getElementById('img2_'+data[0].locy2).src = "stimuli/scrambled.jpg";
-			
-			setTimeout(function(){document.getElementById("fixation").style.display="none";
-			document.getElementById("firstdisplay").style.display="block";}, 1000);
-			
-			setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
-			document.getElementById("scrambled").style.display="block";}, 2500);
-
-			setTimeout(function(){document.getElementById("scrambled").style.display="none";
-			document.getElementById("seconddisplay").style.display="block";}, 4500);
-
-		var i;
-		for (i = 0; i < data.length; i++) { 
-
-		}
-	});
-	
-	//$('#scrambled').show();
-	//setT imeout(function(){document.getElementById("scrambled").style.display="none";
-	//document.getElementById("fixation").style.display="block";}, 1000);
-}
-
-
-
-function showFirsttrial(){
-	$('#testtrial1').show();
-	$('#instructions').hide();
-}
-function buttonClicked() {
-	$('#testtrial'+curTrial).hide();
-	curTrial++;
-	$('#testtrial'+curTrial).show();
-}
-$(document).ready(function(){
-	$('#start').click(showDemo);
-	$('#showinstructions').click(showInstructions);
-	$(document).bind('keyup', 'space', experiment);
-	$(document).bind('keyup', 'j', pressedSame);
-	$(document).bind('keyup', 'k', pressedDiff);
-	//$('.responseButton').click(buttonClicked);
-});
-
-</script>
 
 <div class = "textBox" id = "welcome">
 	<p>Welcome to the experiment!</p>
@@ -175,3 +96,86 @@ $(document).ready(function(){
 
 <input type="hidden" id="t1_response" name="t1_response" value="">
 <input type="hidden" id="t1_rt" name="t1_response" value="">
+
+
+
+
+<script>
+function showDemo(){
+	$('#demographic').show();
+	$('#welcome').hide();
+}
+function showInstructions(){
+	$('#instructions').show();
+	$('#demographic').hide();
+}
+
+function pressedSame(){
+	//$('#t' + currentTrial + 'response').val('j');
+	alert('same');
+	NextTrial();
+
+}
+
+function pressedDiff(){
+	//$('#t' + currentTrial + 'response').val('k');
+	alert('diff');
+	NextTrial();
+}
+
+
+function experiment(){
+
+	$('#instructions').hide();
+	$('#fixation').show();
+
+	d3.csv("./sub_file/sub01.csv").then(function(data) {
+			document.getElementById('img1_'+data[0].locy).src = data[0].first_pic;
+			document.getElementById('img1_'+data[0].locy1).src = data[0].lure1;
+			document.getElementById('img1_'+data[0].locy2).src = data[0].lure2;
+
+			document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
+			document.getElementById('img2_'+data[0].locy1).src = "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[0].locy2).src = "stimuli/scrambled.jpg";
+			
+			setTimeout(function(){document.getElementById("fixation").style.display="none";
+			document.getElementById("firstdisplay").style.display="block";}, 1000);
+			
+			setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
+			document.getElementById("scrambled").style.display="block";}, 2500);
+
+			setTimeout(function(){document.getElementById("scrambled").style.display="none";
+			document.getElementById("seconddisplay").style.display="block";}, 4500);
+
+		var i;
+		for (i = 0; i < data.length; i++) { 
+
+		}
+	});
+	
+	//$('#scrambled').show();
+	//setT imeout(function(){document.getElementById("scrambled").style.display="none";
+	//document.getElementById("fixation").style.display="block";}, 1000);
+}
+
+
+
+function showFirsttrial(){
+	$('#testtrial1').show();
+	$('#instructions').hide();
+}
+function buttonClicked() {
+	$('#testtrial'+curTrial).hide();
+	curTrial++;
+	$('#testtrial'+curTrial).show();
+}
+$(document).ready(function(){
+	$('#start').click(showDemo);
+	$('#showinstructions').click(showInstructions);
+	$(document).bind('keyup', 'space', experiment);
+	$(document).bind('keyup', 'j', pressedSame);
+	$(document).bind('keyup', 'k', pressedDiff);
+	//$('.responseButton').click(buttonClicked);
+});
+
+</script>
