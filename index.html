@@ -51,15 +51,21 @@ function showInstructions(){
 	$('#demographic').hide();
 }
 
-function PressedSame(){
+function pressedSame(){
 	//$('#t' + currentTrial + 'response').val('j');
 	alert('same');
+	NextTrial();
 
 }
 
-function PressedDiff(){
+function pressedDiff(){
 	//$('#t' + currentTrial + 'response').val('k');
 	alert('diff');
+	NextTrial();
+}
+
+function nextTrial{
+
 }
 
 function experiment(){
@@ -79,6 +85,9 @@ function experiment(){
 		
 		setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
 		document.getElementById("scrambled").style.display="block";}, 2500);
+
+		setTimeout(function(){document.getElementById("scrambled").style.display="none";
+		document.getElementById("seconddisplay").style.display="block";}, 4500);
 		
 		var i;
 		for (i = 0; i < data.length; i++) { 
@@ -106,8 +115,8 @@ $(document).ready(function(){
 	$('#start').click(showDemo);
 	$('#showinstructions').click(showInstructions);
 	$(document).bind('keyup', 'space', experiment);
-	$(document).bind('keyup', 'j', PressedSame);
-	$(document).bind('keyup', 'k', PressedDiff);
+	$(document).bind('keyup', 'j', pressedSame);
+	$(document).bind('keyup', 'k', pressedDiff);
 	//$('.responseButton').click(buttonClicked);
 });
 
