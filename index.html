@@ -134,12 +134,12 @@ function experiment(){
 		console.log(data)
 
 			document.getElementById("img1_"+data[0].locy).src = data[0].first_pic;
-			document.getElementById("img1_"+data[0].locy1).src = data[0].lure1;
-			document.getElementById("img1_"+data[0].locy2).src = data[0].lure2;
+			document.getElementById("img1_"+data[0].loc2y).src = data[0].lure1;
+			document.getElementById("img1_"+data[0].loc3y).src = data[0].lure2;
 
 			document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
-			document.getElementById('img2_'+data[0].locy1).src = "stimuli/scrambled.jpg";
-			document.getElementById('img2_'+data[0].locy2).src = "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[0].loc2y).src = "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[0].loc3y).src = "stimuli/scrambled.jpg";
 			
 			setTimeout(function(){document.getElementById("fixation").style.display="none";
 			document.getElementById("firstdisplay").style.display="block";}, 1000);
