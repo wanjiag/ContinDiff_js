@@ -134,6 +134,7 @@ function experiment(){
 		console.log(data)
 
 		var i;
+		
 		for (i = 0; i < data.length; i++) { 
 
 			document.getElementById("img1_"+data[i].locy).src = data[i].first_pic;
@@ -151,7 +152,12 @@ function experiment(){
 			document.getElementById("scrambled").style.display="block";}, 2500);
 
 			setTimeout(function(){document.getElementById("scrambled").style.display="none";
-			document.getElementById("seconddisplay").style.display="block";}, 4500);
+			document.getElementById("seconddisplay").style.display="block";}, 3500);
+
+			setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
+				document.getElementById("fixation").style.display="block";
+				continue;
+			}, 5500);
 
 		}
 	});
