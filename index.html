@@ -70,25 +70,24 @@ function experiment(){
 	$('#fixation').show();
 
 	d3.csv("./sub_file/sub01.csv").then(function(data) {
-		
-		//$('#img1_1').src(data[0].first_pic)
-
-		document.getElementById('img1_1').src = data[0].first_pic;
-		document.getElementById('img1_2').src = data[0].lure1;
-		document.getElementById('img1_3').src = data[0].lure2;
-		
-		setTimeout(function(){document.getElementById("fixation").style.display="none";
-		document.getElementById("firstdisplay").style.display="block";}, 1000);
-		
-		setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
-		document.getElementById("scrambled").style.display="block";}, 2500);
-
-		setTimeout(function(){document.getElementById("scrambled").style.display="none";
-		document.getElementById("seconddisplay").style.display="block";}, 4500);
-		
 		var i;
 		for (i = 0; i < data.length; i++) { 
-		  
+			document.getElementById('img1_'+data[0].locy).src = data[0].first_pic;
+			document.getElementById('img1_'+data[0].locy1).src = data[0].lure1;
+			document.getElementById('img1_'+data[0].locy2).src = data[0].lure2;
+
+			document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
+			document.getElementById('img2_'+data[0].locy1).src = "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[0].locy2).src = "stimuli/scrambled.jpg";
+			
+			setTimeout(function(){document.getElementById("fixation").style.display="none";
+			document.getElementById("firstdisplay").style.display="block";}, 1000);
+			
+			setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
+			document.getElementById("scrambled").style.display="block";}, 2500);
+
+			setTimeout(function(){document.getElementById("scrambled").style.display="none";
+			document.getElementById("seconddisplay").style.display="block";}, 4500);
 		}
 	});
 	
@@ -164,14 +163,10 @@ $(document).ready(function(){
 
 <div id="firstdisplay" class="trialDiv">
 	<p><img class="images" id = "img1_1" width="300"><img class="images" id = "img1_2" width="300"><img class="images" id="img1_3" width="300"></p>
-	<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
-	<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
 </div> 
 
 <div id="seconddisplay" class="trialDiv">
 	<p><img class="images" id = "img2_1" width="300"><img class="images" id = "img2_2" width="300"><img class="images" id="img2_3" width="300"></p>
-	<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
-	<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
 </div> 
 
 
