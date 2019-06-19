@@ -70,8 +70,6 @@ function experiment(){
 	$('#fixation').show();
 
 	d3.csv("./sub_file/sub01.csv").then(function(data) {
-		var i;
-		for (i = 0; i < data.length; i++) { 
 			document.getElementById('img1_'+data[0].locy).src = data[0].first_pic;
 			document.getElementById('img1_'+data[0].locy1).src = data[0].lure1;
 			document.getElementById('img1_'+data[0].locy2).src = data[0].lure2;
@@ -88,6 +86,10 @@ function experiment(){
 
 			setTimeout(function(){document.getElementById("scrambled").style.display="none";
 			document.getElementById("seconddisplay").style.display="block";}, 4500);
+
+		var i;
+		for (i = 0; i < data.length; i++) { 
+
 		}
 	});
 	
