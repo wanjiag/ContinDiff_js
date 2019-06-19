@@ -66,11 +66,12 @@ function pressedDiff(){
 
 
 function experiment(){
+
 	$('#instructions').hide();
 	$('#fixation').show();
 
 	d3.csv("./sub_file/sub01.csv").then(function(data) {
-			document.getElementById('img1_'+data[0].locy).src = data[0].first_pic;
+			document.getElementById('img1_1').src = data[0].first_pic;
 			document.getElementById('img1_'+data[0].locy1).src = data[0].lure1;
 			document.getElementById('img1_'+data[0].locy2).src = data[0].lure2;
 
@@ -113,8 +114,8 @@ $(document).ready(function(){
 	$('#start').click(showDemo);
 	$('#showinstructions').click(showInstructions);
 	$(document).bind('keyup', 'space', experiment);
-	//$(document).bind('keyup', 'j', pressedSame);
-	//$(document).bind('keyup', 'k', pressedDiff);
+	$(document).bind('keyup', 'j', pressedSame);
+	$(document).bind('keyup', 'k', pressedDiff);
 	//$('.responseButton').click(buttonClicked);
 });
 
