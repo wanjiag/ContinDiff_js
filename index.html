@@ -18,7 +18,7 @@
 	padding-left: 20px;
 	width: 500px;
 	margin: 0 auto;
-	font-family: Helvetica;
+	font-family: Arial, Helvetica;
 	font-size: 15pt;
 }
 .images{
@@ -52,11 +52,12 @@ function showInstructions(){
 }
 
 function PressedSame(){
-	alert('same')
+	alert('same');
+
 }
 
 function PressedDiff(){
-	alert('diff')
+	alert('diff');
 }
 
 function experiment(){
@@ -65,7 +66,7 @@ function experiment(){
 
 	d3.csv("./sub_file/sub01.csv").then(function(data) {
 		
-		document.getElementById('img1_1').src = data[0].first_pic;
+		$('#img1_1').src = data[0].first_pic;
 		document.getElementById('img1_2').src = data[0].lure1;
 		document.getElementById('img1_3').src = data[0].lure2;
 		
@@ -82,7 +83,7 @@ function experiment(){
 	});
 	
 	//$('#scrambled').show();
-	//setTimeout(function(){document.getElementById("scrambled").style.display="none";
+	//setT imeout(function(){document.getElementById("scrambled").style.display="none";
 	//document.getElementById("fixation").style.display="block";}, 1000);
 }
 
@@ -101,8 +102,8 @@ $(document).ready(function(){
 	$('#start').click(showDemo);
 	$('#showinstructions').click(showInstructions);
 	$(document).bind('keyup', 'space', experiment);
-	$(document).bind('keyup', 's', PressedSame);
-	$(document).bind('keyup', 'd', PressedDiff);
+	$(document).bind('keyup', 'j', PressedSame);
+	$(document).bind('keyup', 'k', PressedDiff);
 	//$('.responseButton').click(buttonClicked);
 });
 
@@ -140,7 +141,7 @@ $(document).ready(function(){
 	<p>If the picture is <strong>different</strong>, press the letter K.</p>
 	</br>
 	</br>
-	<p><b>Press any key to start.</b></p>
+	<p><b>Press the space bar to start.</b></p>
 </div>
 
 <div id="scrambled" class="trialDiv">
@@ -162,3 +163,7 @@ $(document).ready(function(){
 	<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
 	<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
 </div> 
+
+
+<input type="hidden" id="t1_response" name="t1_response" value="">
+<input type="hidden" id="t1_rt" name="t1_response" value="">
