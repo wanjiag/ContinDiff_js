@@ -1,5 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="d3/d3.js"></script>
+<script src="TimTurkTools.js"></script>
 
 <style type="text/css">
 .trialDiv{
@@ -40,116 +41,124 @@
 }
 </style>
 
-<div class = "textBox" id = "welcome">
-<p>Welcome to the experiment!</p>
-</br>
-<a href="#" id="start">Start</a>
-</div>
-
-<div class = "textBox" id = "demographic">
-<p>Before we begin, please complete the following demographic information: </p>
-</br>
-<p>Gender:</p>
-<p><input type="radio" class="demoButton" name="gender">Male 
-	<input type="radio" class="demoButton" name="gender">Female
-	<input type="radio" class="demoButton" name="gender">Prefer not to answer </p>
-</br>
-<p>Age:</p>
-<p><input type="radio" class="demoButton" name="age">Less than 18 
-	<input type="radio" class="demoButton" name="age">18-25 
-	<input type="radio" class="demoButton" name="age">26-35 
-	<input type="radio" class="demoButton" name="age">36-60 
-	<input type="radio" class="demoButton" name="age">61+ 
-</br>
-</br>
-<a href="#" id="showinstructions">Continue.</a>
-</div>
-
-<div class = "textBox" id = "instructions">
-<p>Thank you for participating! Before we begin, please make sure you are in a quiet location where you will not be distracted or disturbed for the next 25 minutes. Please close other windows. The experiment runs fastest when other programs are closed. </p>
-<p>In this experiment, 3 pictures will appear on the screen. Please try your best to memorize these 3 pictures. Then, 3 scrambled pictures will appear and take place of the 3 pictures. Lastly, one of the 3 scrambled pictures will change into a new picture, and you will need to judge whether the picture is the same or different from the previous picture that was on the same place.</p>
-<p>If the picture is <strong>the same</strong>, press the letter J.</p>
-<p>If the picture is <strong>different</strong>, press the letter K.</p>
-
-</br>
-</br>
-<a href="#" id="startExperiment">Start Experiment</a>
-</div>
-
-<div id="scrambled" class="trialDiv">
-<p><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"></p>
-</div> 
-
-<div id="fixation" class="trialDiv">
-<p><img class="images" src="stimuli/fixation.png"  width="30" left></p>
-</div> 
-
-<div id="firstdisplay" class="trialDiv">
-<p><img class="images" id = "img1_1" width="300"><img class="images" id = "img1_2" width="300"><img class="images" id="img1_3" width="300"></p>
-<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
-<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
-</div> 
-
-<div id="seconddisplay" class="trialDiv">
-<p><img class="images" id = "img2_1" width="300"><img class="images" id = "img2_2" width="300"><img class="images" id="img2_3" width="300"></p>
-<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
-<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
-</div> 
-
-
 <script>
-
 function showDemo(){
 	$('#demographic').show();
 	$('#welcome').hide();
 }
-
 function showInstructions(){
 	$('#instructions').show();
 	$('#demographic').hide();
 }
 
+function PressedSame(){
+	alert('same')
+}
+
+function PressedDiff(){
+	alert('diff')
+}
 
 function experiment(){
-
 	$('#instructions').hide();
+	$('#fixation').show();
 
 	d3.csv("./sub_file/sub01.csv").then(function(data) {
-
+		
 		document.getElementById('img1_1').src = data[0].first_pic;
-	    document.getElementById('img1_2').src = data[0].lure1;
-	    document.getElementById('img1_3').src = data[0].lure2;
-		$('$firstdisplay').show();
+		document.getElementById('img1_2').src = data[0].lure1;
+		document.getElementById('img1_3').src = data[0].lure2;
+		
+		setTimeout(function(){document.getElementById("fixation").style.display="none";
+		document.getElementById("firstdisplay").style.display="block";}, 1000);
+		
+		setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
+		document.getElementById("scrambled").style.display="block";}, 2500);
+		
 		var i;
 		for (i = 0; i < data.length; i++) { 
+		  
 		}
 	});
-
 	
-
 	//$('#scrambled').show();
-
 	//setTimeout(function(){document.getElementById("scrambled").style.display="none";
 	//document.getElementById("fixation").style.display="block";}, 1000);
-
 }
+
+
 
 function showFirsttrial(){
 	$('#testtrial1').show();
 	$('#instructions').hide();
 }
-
 function buttonClicked() {
 	$('#testtrial'+curTrial).hide();
 	curTrial++;
 	$('#testtrial'+curTrial).show();
 }
-
 $(document).ready(function(){
 	$('#start').click(showDemo);
 	$('#showinstructions').click(showInstructions);
-	$('#startExperiment').click(experiment);
+	$(document).bind('keyup', 'space', experiment);
+	$(document).bind('keyup', 's', PressedSame);
+	$(document).bind('keyup', 'd', PressedDiff);
 	//$('.responseButton').click(buttonClicked);
 });
 
 </script>
+
+<div class = "textBox" id = "welcome">
+	<p>Welcome to the experiment!</p>
+	</br>
+	<a href="#" id="start">Start</a>
+</div>
+
+<div class = "textBox" id = "demographic">
+	<p>Before we begin, please complete the following demographic information: </p>
+	</br>
+	<p>Gender:</p>
+	<p><input type="radio" class="demoButton" name="gender">Male 
+		<input type="radio" class="demoButton" name="gender">Female
+		<input type="radio" class="demoButton" name="gender">Prefer not to answer </p>
+	</br>
+	<p>Age:</p>
+	<p><input type="radio" class="demoButton" name="age">Less than 18 
+		<input type="radio" class="demoButton" name="age">18-25 
+		<input type="radio" class="demoButton" name="age">26-35 
+		<input type="radio" class="demoButton" name="age">36-60 
+		<input type="radio" class="demoButton" name="age">61+ 
+	</br>
+	</br>
+	<a href="#" id="showinstructions">Continue.</a>
+</div>
+
+<div class = "textBox" id = "instructions">
+	<p>Thank you for participating! Before we begin, please make sure you are in a quiet location where you will not be distracted or disturbed for the next 25 minutes. Please close other windows. The experiment runs fastest when other programs are closed. </p>
+	<p>In this experiment, 3 pictures will appear on the screen. Please try your best to memorize these 3 pictures. Then, 3 scrambled pictures will appear and take place of the 3 pictures. Lastly, one of the 3 scrambled pictures will change into a new picture, and you will need to judge whether the picture is the same or different from the previous picture that was on the same place.</p>
+	<p>If the picture is <strong>the same</strong>, press the letter J.</p>
+	<p>If the picture is <strong>different</strong>, press the letter K.</p>
+	</br>
+	</br>
+	<p><b>Press any key to start.</b></p>
+</div>
+
+<div id="scrambled" class="trialDiv">
+	<p><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"></p>
+</div> 
+
+<div id="fixation" class="trialDiv">
+	<p><img class="images" src="stimuli/fixation.png"  width="30" left></p>
+</div> 
+
+<div id="firstdisplay" class="trialDiv">
+	<p><img class="images" id = "img1_1" width="300"><img class="images" id = "img1_2" width="300"><img class="images" id="img1_3" width="300"></p>
+	<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
+	<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
+</div> 
+
+<div id="seconddisplay" class="trialDiv">
+	<p><img class="images" id = "img2_1" width="300"><img class="images" id = "img2_2" width="300"><img class="images" id="img2_3" width="300"></p>
+	<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
+	<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
+</div> 
