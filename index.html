@@ -52,11 +52,13 @@ function showInstructions(){
 }
 
 function PressedSame(){
+	//$('#t' + currentTrial + 'response').val('j');
 	alert('same');
 
 }
 
 function PressedDiff(){
+	//$('#t' + currentTrial + 'response').val('k');
 	alert('diff');
 }
 
@@ -66,7 +68,9 @@ function experiment(){
 
 	d3.csv("./sub_file/sub01.csv").then(function(data) {
 		
-		$('#img1_1').src = data[0].first_pic;
+		$('#img1_1').src(data[0].first_pic)
+
+		//document.getElementById('img1_1').src = data[0].first_pic;
 		document.getElementById('img1_2').src = data[0].lure1;
 		document.getElementById('img1_3').src = data[0].lure2;
 		
