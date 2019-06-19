@@ -113,17 +113,18 @@ function showInstructions(){
 function experiment(){
 
 	$('#instructions').hide();
-
+	$('#fixation').show();
 	d3.csv("./sub_file/sub01.csv").then(function(data) {
 		
 		document.getElementById('img1_1').src = data[0].first_pic;
 		document.getElementById('img1_2').src = data[0].lure1;
 		document.getElementById('img1_3').src = data[0].lure2;
 		
-		$('#firstdisplay').show();
+		setTimeout(function(){document.getElementById("fixation").style.display="none";
+		document.getElementById("firstdisplay").style.display="block";}, 1000);
+		
 		var i;
 		for (i = 0; i < data.length; i++) { 
-
 		  
 		}
 	});
