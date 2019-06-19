@@ -131,19 +131,14 @@ function experiment(){
 
 	d3.csv("./sub_file/sub01.csv").then(function(data) {
 
-		console.log(data)
+		data.forEach(function(element) {
+		  	document.getElementById("img1_"+element.locy).src = element.first_pic;
+			document.getElementById("img1_"+element.loc2y).src = element.lure1;
+			document.getElementById("img1_"+element.loc3y).src = element.lure2;
 
-		var i;
-		
-		for (i = 0; i < data.length; i++) { 
-
-			document.getElementById("img1_"+data[i].locy).src = data[i].first_pic;
-			document.getElementById("img1_"+data[i].loc2y).src = data[i].lure1;
-			document.getElementById("img1_"+data[i].loc3y).src = data[i].lure2;
-
-			document.getElementById('img2_'+data[i].locy).src = data[i].second_pic;
-			document.getElementById('img2_'+data[i].loc2y).src = "stimuli/scrambled.jpg";
-			document.getElementById('img2_'+data[i].loc3y).src = "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+element.locy).src = element.second_pic;
+			document.getElementById('img2_'+element.loc2y).src = "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+element.loc3y).src = "stimuli/scrambled.jpg";
 			
 			setTimeout(function(){document.getElementById("fixation").style.display="none";
 			document.getElementById("firstdisplay").style.display="block";}, 1000);
@@ -156,10 +151,8 @@ function experiment(){
 
 			setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
 				document.getElementById("fixation").style.display="block";
-				continue;
 			}, 5500);
-
-		}
+		});
 	});
 	
 	//$('#scrambled').show();
