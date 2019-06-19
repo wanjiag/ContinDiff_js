@@ -1,14 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="d3/d3.js"></script>
-<script>
-
-var subfile
-
-d3.csv("./sub_file/sub01.csv").then(function(data) {
-	  console.log(data);
-	  subfile = data;
-	});
-</script>
 
 <style type="text/css">
 .trialDiv{
@@ -21,6 +12,7 @@ d3.csv("./sub_file/sub01.csv").then(function(data) {
 	margin: 0 auto;
 }
 .textBox{
+	display: none;
 	border: 1px solid white;
 	padding-left: 20px;
 	width: 500px;
@@ -33,11 +25,18 @@ d3.csv("./sub_file/sub01.csv").then(function(data) {
 	margin-left:10px;
 	margin-right:10px;
 }
-#demographic{
-	display: none;
+#welcome{
+	display: block;
 }
-#instructions{
+#fixation{
 	display: none;
+	border: 1px solid white;
+	border-color: read;
+	border-width: 1px;
+	padding-left: 0px;
+	padding-top: 150px;
+	width: 30px;
+	margin: 0 auto;
 }
 </style>
 
@@ -77,6 +76,26 @@ d3.csv("./sub_file/sub01.csv").then(function(data) {
 <a href="#" id="startExperiment">Start Experiment</a>
 </div>
 
+<div id="scrambled" class="trialDiv">
+<p><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"></p>
+</div> 
+
+<div id="fixation" class="trialDiv">
+<p><img class="images" src="stimuli/fixation.png"  width="30" left></p>
+</div> 
+
+<div id="firstdisplay" class="trialDiv">
+<p><img class="images" id = "img1_1" width="300"><img class="images" id = "img1_2" width="300"><img class="images" id="img1_3" width="300"></p>
+<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
+<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
+</div> 
+
+<div id="seconddisplay" class="trialDiv">
+<p><img class="images" id = "img2_1" width="300"><img class="images" id = "img2_2" width="300"><img class="images" id="img2_3" width="300"></p>
+<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
+<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
+</div> 
+
 <div id="testtrial1" class="trialDiv">
 <p><img class="images" src=data[0].first_pic  width="300"><img class="images" src=data[0].lure1  width="300"><img class="images" src=data[0].lure2 width="300"></p>
 <p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
@@ -84,22 +103,8 @@ d3.csv("./sub_file/sub01.csv").then(function(data) {
 </div> 
 
 
-<div id="testtrial2" class="trialDiv">
-<p><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"></p>
-<p><input type="radio" class="responseButton" name="question4" value="-1"> the same </p>
-<p><input type="radio" class="responseButton" name="question4" value="1"> different </p>
-</div> 
 
 <script>
-
-var subfile
-
-d3.csv("./sub_file/sub01.csv").then(function(data) {
-	  console.log(data);
-	  subfile = data;
-	});
-
-var curTrial = 1;
 
 function showDemo(){
 	$('#demographic').show();
@@ -109,6 +114,27 @@ function showDemo(){
 function showInstructions(){
 	$('#instructions').show();
 	$('#demographic').hide();
+}
+
+
+function experiment(){
+
+	$('#instructions').hide();
+
+	d3.csv("./sub_file/sub01.csv").then(function(data) {
+		var i;
+		for (i = 0; i < data.length; i++) { 
+		  document.getElementById('img1_1').src = data[i].first_pic;
+		  document.getElementById('img1_2').src = data[i].lure1;
+		  document.getElementById('img1_3').src = data[i].lure2;
+		}
+	});
+
+	//$('#scrambled').show();
+
+	//setTimeout(function(){document.getElementById("scrambled").style.display="none";
+	//document.getElementById("fixation").style.display="block";}, 1000);
+
 }
 
 function showFirsttrial(){
@@ -125,8 +151,8 @@ function buttonClicked() {
 $(document).ready(function(){
 	$('#start').click(showDemo);
 	$('#showinstructions').click(showInstructions);
-	$('#startExperiment').click(showFirsttrial)
-	$('.responseButton').click(buttonClicked);
+	$('#startExperiment').click(experiment);
+	//$('.responseButton').click(buttonClicked);
 });
 
 </script>
