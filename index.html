@@ -1,63 +1,111 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="d3/d3.js"></script>
 
-<style type="text/css">
-.trialDiv{
-	display: none;
-	border: 1px solid grey;
-	border-color: read;
-	border-width: 1px;
-	padding-left: 20px;
-	width: 1000px;
-	margin: 0 auto;
-}
-#instructions{
-	border: 1px solid grey;
-	padding-left: 20px;
-	width: 500px;
-	margin: 0 auto;
-	font-family: Helvetica;
-	font-size: 20pt;
-}
-</style>
-
-
-<div id = "instructions">
-<p>
-Remember the pictures on the screen.
-Report whether the re-appeared picture
-is old or new after a short delay with
-scrambled images.</br></p>
-</br>
-<b>old = k</b></br>
-<b>new = j</b></br>
-</br>
-<p>Press any key to start.</p>
-<a href="#" id="startExperiment">Start Experiment</a>
-</div>
-
 <script>
-	d3.csv("./sub_file/sub10.csv").then(function(data) {
+	d3.csv("./sub_file/sub01.csv").then(function(data) {
 	  console.log(data);
 	});
 </script>
 
+<style type="text/css">
+.trialDiv{
+	display: none;
+	border: 1px solid white;
+	border-color: read;
+	border-width: 1px;
+	padding-left: 0px;
+	width: 960px;
+	margin: 0 auto;
+}
+.textBox{
+	border: 1px solid white;
+	padding-left: 20px;
+	width: 500px;
+	margin: 0 auto;
+	font-family: Helvetica;
+	font-size: 15pt;
+}
+.images{
+	display:inline-block;
+	margin-left:10px;
+	margin-right:10px;
+}
+#demographic{
+	display: none;
+}
+#instructions{
+	display: none;
+}
+</style>
+
+<div class = "textBox" id = "welcome">
+<p>Welcome to the experiment!</p>
+</br>
+<a href="#" id="start">Start</a>
+</div>
+
+<div class = "textBox" id = "demographic">
+<p>Before we begin, please complete the following demographic information: </p>
+</br>
+<p>Gender:</p>
+<p><input type="radio" class="demoButton" name="gender">Male 
+	<input type="radio" class="demoButton" name="gender">Female
+	<input type="radio" class="demoButton" name="gender">Prefer not to answer </p>
+</br>
+<p>Age:</p>
+<p><input type="radio" class="demoButton" name="age">Less than 18 
+	<input type="radio" class="demoButton" name="age">18-25 
+	<input type="radio" class="demoButton" name="age">26-35 
+	<input type="radio" class="demoButton" name="age">36-60 
+	<input type="radio" class="demoButton" name="age">61+ 
+</br>
+</br>
+<a href="#" id="showinstructions">Continue.</a>
+</div>
+
+<div class = "textBox" id = "instructions">
+<p>Thank you for participating! Before we begin, please make sure you are in a quiet location where you will not be distracted or disturbed for the next 25 minutes. Please close other windows. The experiment runs fastest when other programs are closed. </p>
+<p>In this experiment, 3 pictures will appear on the screen. Please try your best to memorize these 3 pictures. Then, 3 scrambled pictures will appear and take place of the 3 pictures. Lastly, one of the 3 scrambled pictures will change into a new picture, and you will need to judge whether the picture is the same or different from the previous picture that was on the same place.</p>
+<p>If the picture is <strong>the same</strong>, press the letter J.</p>
+<p>If the picture is <strong>different</strong>, press the letter K.</p>
+
+</br>
+</br>
+<a href="#" id="startExperiment">Start Experiment</a>
+</div>
+
+
 
 <div id="testtrial1" class="trialDiv">
-<p><img src="stimuli/scrambled.jpg"  width="100"></p>
-<p><input type="radio" class="responseButton" name="question2" value="-1"> smaller </p>
-<p><input type="radio" class="responseButton" name="question2" value="1"> bigger </p>
+<p><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"></p>
+<p><input type="radio" class="responseButton" name="question2" value="-1"> the same </p>
+<p><input type="radio" class="responseButton" name="question2" value="1"> different </p>
 </div> 
 
 
 <div id="testtrial2" class="trialDiv">
 <p><img src="http://timbrady.org/turk/images/car.jpg" width="100"></p>
-<p><input type="radio" class="responseButton" name="question4" value="-1"> smaller </p>
-<p><input type="radio" class="responseButton" name="question4" value="1"> bigger </p>
+<p><input type="radio" class="responseButton" name="question4" value="-1"> the same </p>
+<p><input type="radio" class="responseButton" name="question4" value="1"> different </p>
 </div> 
 
 <script>
 var curTrial = 1;
+
+function showDemo(){
+	$('#demographic').show();
+	$('#welcome').hide();
+}
+
+function showInstructions(){
+	$('#instructions').show();
+	$('#demographic').hide();
+}
+
+function showFirsttrial(){
+	$('#testtrial1').show();
+	$('#instructions').hide();
+}
 
 function buttonClicked() {
 	$('#testtrial'+curTrial).hide();
@@ -65,13 +113,10 @@ function buttonClicked() {
 	$('#testtrial'+curTrial).show();
 }
 
-function showFirstTrial(){
-	$('#testtrial1').show();
-	$('#instructions').hide();
-}
-
 $(document).ready(function(){
-	$('#startExperiment').click(showFirstTrial);
+	$('#start').click(showDemo);
+	$('#showinstructions').click(showInstructions);
+	$('#startExperiment').click(showFirsttrial)
 	$('.responseButton').click(buttonClicked);
 });
 
