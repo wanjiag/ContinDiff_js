@@ -102,8 +102,10 @@
 
     $(document).ready(function(){
         $('#showinstructions').click(function(){
-        	sub_gender = $("input[name='subgender']:checked").val();
-        	sub_age = $("input[name='subage']:checked").val()
+        	sub_gender = $("input[name='gender']:checked").val();
+        	$('#subgender').val(sub_gender)
+        	sub_age = $("input[name='age']:checked").val()
+        	$('#subage').val(sub_age)
             alert("Your are a - " + sub_gender + " " + sub_age);
         });
     });
