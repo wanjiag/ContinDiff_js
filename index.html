@@ -93,120 +93,134 @@
 	<p><img class="images" id = "img2_1" width="300"><img class="images" id = "img2_2" width="300"><img class="images" id="img2_3" width="300"></p>
 </div> 
 
-<input type="hidden" id="gender" name="gender" value="">
-<input type="hidden" id="age" name="age" value="">
-<input type="hidden" id="t1_response" name="t1_response" value="">
-<input type="hidden" id="t1_rt" name="t1_response" value="">
+<input type="hidden" id="subgender" name="subgender" value="">
+<input type="hidden" id="subage" name="subage" value="">
 
 <script>
+	var sub_gender
+	var sub_age
 
-var sub_gender = $("input[name='gender']:checked").val()
-$('#gender').val(sub_gender)
+    $(document).ready(function(){
+        $(('#showinstructions').click(function(){
+        	sub_gender = $("input[name='subgender']:checked").val();
+        	sub_age = $("input[name='subage']:checked").val()
+        	if(sub_gender){
+                alert("Your are a - " + sub_gender + " " + sub_age);
+            }
+        });
+    });
 
-var sub_age = $("input[name='age']:checked").val()
-$('#age').val(sub_age)
+	var currentTrial = 0;
+	var data;
+	var respwindow = false;
 
-var currentTrial = 0;
-var data;
-var respwindow = false;
+	d3.csv("./sub_file/sub01.csv").then(function(subdata) {
+		data = subdata
+	});
 
-d3.csv("./sub_file/sub01.csv").then(function(subdata) {
-	data = subdata
-});
+	function showDemo(){
+		$('#demographic').show();
+		$('#welcome').hide();
+	}
+	function showInstructions(){
+		$('#instructions').show();
+		$('#demographic').hide();
+	}
 
-function showDemo(){
-	$('#demographic').show();
-	$('#welcome').hide();
-}
-function showInstructions(){
-	$('#instructions').show();
-	$('#demographic').hide();
-}
+	function pressedSame(){
+		//$('#t' + currentTrial + 'response').val('j')
+		$("#seconddisplay").hide();
 
-function pressedSame(){
-	//$('#t' + currentTrial + 'response').val('j')
-	$("#seconddisplay").hide();
-	NextTrial();
+		var input = document.createElement("input");
+		input.setAttribute("type", "hidden");
+		input.setAttribute("name", "resp"+currentTrial);
+		input.setAttribute("value", "j");
 
-}
+		NextTrial();
 
-function pressedDiff(){
-	//$('#t' + currentTrial + 'response').val('k');
-	$("#seconddisplay").hide();
-	NextTrial();
-}
+	}
 
+	function pressedDiff(){
+		//$('#t' + currentTrial + 'response').val('k');
+		$("#seconddisplay").hide();
 
-function NextTrial(){
+		var input = document.createElement("input");
+		input.setAttribute("type", "hidden");
+		input.setAttribute("name", "resp"+currentTrial);
+		input.setAttribute("value", "k");
 
-	$('#fixation').show();
-
-	document.getElementById("img1_"+data[currentTrial].locy).src = data[currentTrial].first_pic;
-	document.getElementById("img1_"+data[currentTrial].loc2y).src = data[currentTrial].lure1;
-	document.getElementById("img1_"+data[currentTrial].loc3y).src = data[currentTrial].lure2;
-
-	document.getElementById('img2_'+data[currentTrial].locy).src = data[currentTrial].second_pic;
-	document.getElementById('img2_'+data[currentTrial].loc2y).src = "stimuli/scrambled.jpg";
-	document.getElementById('img2_'+data[currentTrial].loc3y).src = "stimuli/scrambled.jpg";
-			
-	setTimeout(function(){document.getElementById("fixation").style.display="none";
-	document.getElementById("firstdisplay").style.display="block";}, 1000);
-			
-	setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
-	document.getElementById("scrambled").style.display="block";}, 2500);
-
-	setTimeout(function(){document.getElementById("scrambled").style.display="none";
-	document.getElementById("seconddisplay").style.display="block";}, 3500);
-
-	setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
-	}, 5500);
-
-	currentTrial++;
-
-}
+		NextTrial();
+	}
 
 
-function showFirsttrial(){
+	function NextTrial(){
 
-	$('#instructions').hide();
-	$('#fixation').show();
+		$('#fixation').show();
 
-	document.getElementById("img1_"+data[0].locy).src = data[0].first_pic;
-	document.getElementById("img1_"+data[0].loc2y).src = data[0].lure1;
-	document.getElementById("img1_"+data[0].loc3y).src = data[0].lure2;
+		document.getElementById("img1_"+data[currentTrial].locy).src = data[currentTrial].first_pic;
+		document.getElementById("img1_"+data[currentTrial].loc2y).src = data[currentTrial].lure1;
+		document.getElementById("img1_"+data[currentTrial].loc3y).src = data[currentTrial].lure2;
 
-	document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
-	document.getElementById('img2_'+data[0].loc2y).src = "stimuli/scrambled.jpg";
-	document.getElementById('img2_'+data[0].loc3y).src = "stimuli/scrambled.jpg";
-			
-	setTimeout(function(){$("#fixation").hide();
-	$("#firstdisplay").show();}, 1000);
-			
-	setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
-	document.getElementById("scrambled").style.display="block";}, 2500);
+		document.getElementById('img2_'+data[currentTrial].locy).src = data[currentTrial].second_pic;
+		document.getElementById('img2_'+data[currentTrial].loc2y).src = "stimuli/scrambled.jpg";
+		document.getElementById('img2_'+data[currentTrial].loc3y).src = "stimuli/scrambled.jpg";
+				
+		setTimeout(function(){$("#fixation").hide();
+		                      $("#firstdisplay").show();}, 1000);
+				
+		setTimeout(function(){$("#firstdisplay").hide();
+						      $("#scrambled").show();}, 2500);
 
-	setTimeout(function(){document.getElementById("scrambled").style.display="none";
-	document.getElementById("seconddisplay").style.display="block";}, 3500);
+		setTimeout(function(){$("#scrambled").hide();
+		                      $("#seconddisplay").show();}, 3500);
 
-	setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
-	}, 5500);
+		setTimeout(function(){$("#seconddisplay").hide();}, 5500);
 
-	currentTrial++;
-}
+		currentTrial++;
+
+	}
 
 
-function buttonClicked() {
-	$('#testtrial'+curTrial).hide();
-	curTrial++;
-	$('#testtrial'+curTrial).show();
-}
-$(document).ready(function(){
-	$('#start').click(showDemo);
-	$('#showinstructions').click(showInstructions);
-	$(document).bind('keyup', 'space', showFirsttrial);
-	$(document).bind('keyup', 'j', pressedSame);
-	$(document).bind('keyup', 'k', pressedDiff);
-	//$('.responseButton').click(buttonClicked);
-});
+	function showFirsttrial(){
+
+		$('#instructions').hide();
+		$('#fixation').show();
+
+		document.getElementById("img1_"+data[0].locy).src = data[0].first_pic;
+		document.getElementById("img1_"+data[0].loc2y).src = data[0].lure1;
+		document.getElementById("img1_"+data[0].loc3y).src = data[0].lure2;
+
+		document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
+		document.getElementById('img2_'+data[0].loc2y).src = "stimuli/scrambled.jpg";
+		document.getElementById('img2_'+data[0].loc3y).src = "stimuli/scrambled.jpg";
+				
+		setTimeout(function(){$("#fixation").hide();
+		                      $("#firstdisplay").show();}, 1000);
+				
+		setTimeout(function(){$("#firstdisplay").hide();
+						      $("#scrambled").show();}, 2500);
+
+		setTimeout(function(){$("#scrambled").hide();
+		                      $("#seconddisplay").show();}, 3500);
+
+		setTimeout(function(){$("#seconddisplay").hide();}, 5500);
+
+		currentTrial++;
+	}
+
+
+	function buttonClicked() {
+		$('#testtrial'+curTrial).hide();
+		curTrial++;
+		$('#testtrial'+curTrial).show();
+	}
+	$(document).ready(function(){
+		$('#start').click(showDemo);
+		$('#showinstructions').click(showInstructions);
+		$(document).bind('keyup', 'space', showFirsttrial);
+		$(document).bind('keyup', 'j', pressedSame);
+		$(document).bind('keyup', 'k', pressedDiff);
+		//$('.responseButton').click(buttonClicked);
+	});
 
 </script>
