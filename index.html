@@ -93,14 +93,21 @@
 	<p><img class="images" id = "img2_1" width="300"><img class="images" id = "img2_2" width="300"><img class="images" id="img2_3" width="300"></p>
 </div> 
 
-
+<input type="hidden" id="gender" name="gender" value="">
+<input type="hidden" id="age" name="gender" value="">
 <input type="hidden" id="t1_response" name="t1_response" value="">
 <input type="hidden" id="t1_rt" name="t1_response" value="">
 
 
-
-
 <script>
+
+var currentTrial = 0;
+var data;
+
+d3.csv("./sub_file/sub01.csv").then(function(subdata) {
+	data = subdata
+	});
+
 function showDemo(){
 	$('#demographic').show();
 	$('#welcome').hide();
@@ -124,48 +131,65 @@ function pressedDiff(){
 }
 
 
-function experiment(){
+function NextTrial(){
 
-	$('#instructions').hide();
-	$('#fixation').show();
+	document.getElementById("img1_"+data[currentTrial].locy).src = data[currentTrial].first_pic;
+	document.getElementById("img1_"+data[currentTrial].loc2y).src = data[currentTrial].lure1;
+	document.getElementById("img1_"+data[currentTrial].loc3y).src = data[currentTrial].lure2;
 
-	d3.csv("./sub_file/sub01.csv").then(function(data) {
-
-		data.forEach(function(element) {
-		  	document.getElementById("img1_"+element.locy).src = element.first_pic;
-			document.getElementById("img1_"+element.loc2y).src = element.lure1;
-			document.getElementById("img1_"+element.loc3y).src = element.lure2;
-
-			document.getElementById('img2_'+element.locy).src = element.second_pic;
-			document.getElementById('img2_'+element.loc2y).src = "stimuli/scrambled.jpg";
-			document.getElementById('img2_'+element.loc3y).src = "stimuli/scrambled.jpg";
+	document.getElementById('img2_'+data[currentTrial].locy).src = data[currentTrial].second_pic;
+	document.getElementById('img2_'+data[currentTrial].loc2y).src = "stimuli/scrambled.jpg";
+	document.getElementById('img2_'+data[currentTrial].loc3y).src = "stimuli/scrambled.jpg";
 			
-			setTimeout(function(){document.getElementById("fixation").style.display="none";
-			document.getElementById("firstdisplay").style.display="block";}, 1000);
+	setTimeout(function(){document.getElementById("fixation").style.display="none";
+	document.getElementById("firstdisplay").style.display="block";}, 1000);
 			
-			setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
-			document.getElementById("scrambled").style.display="block";}, 2500);
+	setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
+	document.getElementById("scrambled").style.display="block";}, 2500);
 
-			setTimeout(function(){document.getElementById("scrambled").style.display="none";
-			document.getElementById("seconddisplay").style.display="block";}, 3500);
+	setTimeout(function(){document.getElementById("scrambled").style.display="none";
+	document.getElementById("seconddisplay").style.display="block";}, 3500);
 
-			setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
-				document.getElementById("fixation").style.display="block";
-			}, 5500);
-		});
-	});
-	
-	//$('#scrambled').show();
-	//setT imeout(function(){document.getElementById("scrambled").style.display="none";
-	//document.getElementById("fixation").style.display="block";}, 1000);
+	setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
+		document.getElementById("fixation").style.display="block";
+	}, 5500);
+
+	currentTrial++;
+
 }
 
 
 
 function showFirsttrial(){
-	$('#testtrial1').show();
+
 	$('#instructions').hide();
+	$('#fixation').show();
+
+	document.getElementById("img1_"+data[0].locy).src = data[0].first_pic;
+	document.getElementById("img1_"+data[0].loc2y).src = data[0].lure1;
+	document.getElementById("img1_"+data[0].loc3y).src = data[0].lure2;
+
+	document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
+	document.getElementById('img2_'+data[0].loc2y).src = "stimuli/scrambled.jpg";
+	document.getElementById('img2_'+data[0].loc3y).src = "stimuli/scrambled.jpg";
+			
+	setTimeout(function(){document.getElementById("fixation").style.display="none";
+	document.getElementById("firstdisplay").style.display="block";}, 1000);
+			
+	setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
+	document.getElementById("scrambled").style.display="block";}, 2500);
+
+	setTimeout(function(){document.getElementById("scrambled").style.display="none";
+	document.getElementById("seconddisplay").style.display="block";}, 3500);
+
+	setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
+		document.getElementById("fixation").style.display="block";
+	}, 5500);
+
+	currentTrial++;
 }
+
+
 function buttonClicked() {
 	$('#testtrial'+curTrial).hide();
 	curTrial++;
@@ -174,7 +198,7 @@ function buttonClicked() {
 $(document).ready(function(){
 	$('#start').click(showDemo);
 	$('#showinstructions').click(showInstructions);
-	$(document).bind('keyup', 'space', experiment);
+	$(document).bind('keyup', 'space', showFirsttrial);
 	$(document).bind('keyup', 'j', pressedSame);
 	$(document).bind('keyup', 'k', pressedDiff);
 	//$('.responseButton').click(buttonClicked);
