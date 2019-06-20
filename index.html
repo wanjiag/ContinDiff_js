@@ -124,18 +124,22 @@ function showInstructions(){
 
 function pressedSame(){
 	//$('#t' + currentTrial + 'response').val('j')
+	$("#seconddisplay").hide();
 	NextTrial();
 
 }
 
 function pressedDiff(){
 	//$('#t' + currentTrial + 'response').val('k');
+	$("#seconddisplay").hide();
 	NextTrial();
 }
 
 
 function NextTrial(){
 
+	$('#fixation').show();
+	
 	document.getElementById("img1_"+data[currentTrial].locy).src = data[currentTrial].first_pic;
 	document.getElementById("img1_"+data[currentTrial].loc2y).src = data[currentTrial].lure1;
 	document.getElementById("img1_"+data[currentTrial].loc3y).src = data[currentTrial].lure2;
@@ -175,8 +179,8 @@ function showFirsttrial(){
 	document.getElementById('img2_'+data[0].loc2y).src = "stimuli/scrambled.jpg";
 	document.getElementById('img2_'+data[0].loc3y).src = "stimuli/scrambled.jpg";
 			
-	setTimeout(function(){document.getElementById("fixation").style.display="none";
-	document.getElementById("firstdisplay").style.display="block";}, 1000);
+	setTimeout(function(){($"#fixation").hide();
+	$("#firstdisplay").show();}, 1000);
 			
 	setTimeout(function(){document.getElementById("firstdisplay").style.display="none";
 	document.getElementById("scrambled").style.display="block";}, 2500);
@@ -185,7 +189,7 @@ function showFirsttrial(){
 	document.getElementById("seconddisplay").style.display="block";}, 3500);
 
 	setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
-		document.getElementById("fixation").style.display="block";
+		NextTrial()
 	}, 5500);
 
 	currentTrial++;
