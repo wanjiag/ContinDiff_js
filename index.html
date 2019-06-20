@@ -108,6 +108,7 @@ $('#age').val(sub_age)
 
 var currentTrial = 0;
 var data;
+var respwindow = false;
 
 d3.csv("./sub_file/sub01.csv").then(function(subdata) {
 	data = subdata
@@ -158,7 +159,6 @@ function NextTrial(){
 	document.getElementById("seconddisplay").style.display="block";}, 3500);
 
 	setTimeout(function(){document.getElementById("seconddisplay").style.display="none";
-		document.getElementById("fixation").style.display="block";
 	}, 5500);
 
 	currentTrial++;
