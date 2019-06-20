@@ -52,16 +52,16 @@
 	<p>Before we begin, please complete the following demographic information: </p>
 	</br>
 	<p>Gender:</p>
-	<p><input type="radio" class="demoButton" name="gender">Male 
-		<input type="radio" class="demoButton" name="gender">Female
-		<input type="radio" class="demoButton" name="gender">Prefer not to answer </p>
+	<p><input type="radio" class="demoButton" name="gender" value="1">Male 
+		<input type="radio" class="demoButton" name="gender" value="2">Female
+		<input type="radio" class="demoButton" name="gender" value="3">Prefer not to answer </p>
 	</br>
 	<p>Age:</p>
-	<p><input type="radio" class="demoButton" name="age">Less than 18 
-		<input type="radio" class="demoButton" name="age">18-25 
-		<input type="radio" class="demoButton" name="age">26-35 
-		<input type="radio" class="demoButton" name="age">36-60 
-		<input type="radio" class="demoButton" name="age">61+ 
+	<p><input type="radio" class="demoButton" name="age" value="1">Less than 18 
+		<input type="radio" class="demoButton" name="age" value="2">18-25 
+		<input type="radio" class="demoButton" name="age" value="3">26-35 
+		<input type="radio" class="demoButton" name="age" value="4">36-60 
+		<input type="radio" class="demoButton" name="age" value="5">61+ 
 	</br>
 	</br>
 	<a href="#" id="showinstructions">Continue.</a>
@@ -94,19 +94,24 @@
 </div> 
 
 <input type="hidden" id="gender" name="gender" value="">
-<input type="hidden" id="age" name="gender" value="">
+<input type="hidden" id="age" name="age" value="">
 <input type="hidden" id="t1_response" name="t1_response" value="">
 <input type="hidden" id="t1_rt" name="t1_response" value="">
 
-
 <script>
+
+var sub_gender = $("input[name='gender']:checked").val()
+$('#gender').val(sub_gender)
+
+var sub_age = $("input[name='age']:checked").val()
+$('#age').val(sub_age)
 
 var currentTrial = 0;
 var data;
 
 d3.csv("./sub_file/sub01.csv").then(function(subdata) {
 	data = subdata
-	});
+});
 
 function showDemo(){
 	$('#demographic').show();
@@ -118,15 +123,13 @@ function showInstructions(){
 }
 
 function pressedSame(){
-	//$('#t' + currentTrial + 'response').val('j');
-	alert('same');
+	//$('#t' + currentTrial + 'response').val('j')
 	NextTrial();
 
 }
 
 function pressedDiff(){
 	//$('#t' + currentTrial + 'response').val('k');
-	alert('diff');
 	NextTrial();
 }
 
@@ -157,7 +160,6 @@ function NextTrial(){
 	currentTrial++;
 
 }
-
 
 
 function showFirsttrial(){
