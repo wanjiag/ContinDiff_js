@@ -106,7 +106,6 @@
         	$('#subgender').val(sub_gender)
         	sub_age = $("input[name='age']:checked").val()
         	$('#subage').val(sub_age)
-            alert("Your are a - " + sub_gender + " " + sub_age);
         });
     });
 
@@ -128,6 +127,13 @@
 	}
 
 	function pressedSame(){
+
+		if (!respwindow){
+			return;
+		}
+
+		respwindow = false;
+
 		//$('#t' + currentTrial + 'response').val('j')
 		$("#seconddisplay").hide();
 
@@ -141,6 +147,13 @@
 	}
 
 	function pressedDiff(){
+
+		if (!respwindow){
+			return;
+		}
+
+		respwindow = false;
+
 		//$('#t' + currentTrial + 'response').val('k');
 		$("#seconddisplay").hide();
 
@@ -172,7 +185,8 @@
 						      $("#scrambled").show();}, 2500);
 
 		setTimeout(function(){$("#scrambled").hide();
-		                      $("#seconddisplay").show();}, 3500);
+		                      $("#seconddisplay").show();
+		                  	  respwindow = true;}, 3500);
 
 		setTimeout(function(){$("#seconddisplay").hide();}, 5500);
 
@@ -201,7 +215,8 @@
 						      $("#scrambled").show();}, 2500);
 
 		setTimeout(function(){$("#scrambled").hide();
-		                      $("#seconddisplay").show();}, 3500);
+		                      $("#seconddisplay").show();
+		                      respwindow = true;}, 3500);
 
 		setTimeout(function(){$("#seconddisplay").hide();}, 5500);
 
