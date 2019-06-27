@@ -51,6 +51,11 @@
 <div class = "textBox" id = "demographic">
 	<p>Before we begin, please complete the following demographic information: </p>
 	</br>
+
+	<p> Please enter your participant number:</p>
+	<p><input type="text" name="id" required></p> 
+
+	</br>
 	<p>Gender:</p>
 	<p><input type="radio" class="demoButton" name="gender" value="1">Male 
 		<input type="radio" class="demoButton" name="gender" value="2">Female
@@ -99,12 +104,14 @@
 
 <input type="hidden" id="subgender" name="subgender" value="">
 <input type="hidden" id="subage" name="subage" value="">
+<input type="hidden" id="subid" name="subid" value="">
 <input type="hidden" id="resp" name="resp" value="">
 <input type="hidden" id="rt" name="rt" value="">
 
 <script>
 	var sub_gender
 	var sub_age
+	var sub_id
 
     $(document).ready(function(){
         $('#showinstructions').click(function(){
@@ -112,6 +119,9 @@
         	$('#subgender').val(sub_gender)
         	sub_age = $("input[name='age']:checked").val()
         	$('#subage').val(sub_age)
+        	sub_id = $("input[name='id']").val()
+        	$('#subid').val(sub_id)
+
         });
     });
 
@@ -122,7 +132,8 @@
 	var resp = new Array(18);
 	var rt_array = new Array(18);
 
-	d3.csv("./sub_file/sub01.csv").then(function(subdata) {
+	csv_file = "./sub_file/sub"+sub_id+"01.csv"
+	d3.csv(csv_file).then(function(subdata) {
 		data = subdata
 	});
 
