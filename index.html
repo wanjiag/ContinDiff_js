@@ -113,6 +113,8 @@
 	var sub_age
 	var sub_id
 
+	var data;
+
     $(document).ready(function(){
         $('#showinstructions').click(function(){
         	sub_gender = $("input[name='gender']:checked").val();
@@ -122,20 +124,21 @@
         	sub_id = $("input[name='id']").val()
         	$('#subid').val(sub_id)
 
+        	csv_file = "./sub_file/sub"+sub_id+".csv"
+			d3.csv(csv_file).then(function(subdata) {
+			data = subdata
+	});
+
+
         });
     });
 
 	var currentTrial = 0;
-	var data;
 	var respwindow = false;
 	var startDispTime;
 	var resp = new Array(18);
 	var rt_array = new Array(18);
 
-	csv_file = "./sub_file/sub"+sub_id+"01.csv"
-	d3.csv(csv_file).then(function(subdata) {
-		data = subdata
-	});
 
 	function showDemo(){
 		$('#demographic').show();
