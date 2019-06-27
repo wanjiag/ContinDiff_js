@@ -68,7 +68,7 @@
 </div>
 
 <div class = "textBox" id = "instructions">
-	<p>Thank you for participating! Before we begin, please make sure you are in a quiet location where you will not be distracted or disturbed for the next 25 minutes. Please close other windows. The experiment runs fastest when other programs are closed. </p>
+	<p>Thank you for participating! Before we begin, please make sure you are in a quiet location where you will not be distracted or disturbed for the next minute. Please close other windows. The experiment runs fastest when other programs are closed. </p>
 	<p>In this experiment, 3 pictures will appear on the screen. Please try your best to memorize these 3 pictures. Then, 3 scrambled pictures will appear and take place of the 3 pictures. Lastly, one of the 3 scrambled pictures will change into a new picture, and you will need to judge whether the picture is the same or different from the previous picture that was on the same place.</p>
 	<p>If the picture is <strong>the same</strong>, press the letter J.</p>
 	<p>If the picture is <strong>different</strong>, press the letter K.</p>
@@ -100,6 +100,7 @@
 <input type="hidden" id="subgender" name="subgender" value="">
 <input type="hidden" id="subage" name="subage" value="">
 <input type="hidden" id="resp" name="resp" value="">
+<input type="hidden" id="rt" name="rt" value="">
 
 <script>
 	var sub_gender
@@ -117,7 +118,9 @@
 	var currentTrial = 0;
 	var data;
 	var respwindow = false;
+	var startDispTime;
 	var resp = new Array(18);
+	var rt_array = new Array(18);
 
 	d3.csv("./sub_file/sub01.csv").then(function(subdata) {
 		data = subdata
@@ -138,6 +141,10 @@
 			return;
 		}
 
+		var currentTime = new Date().getTime();
+		var RT = currentTime - startTrialTime;
+		rt_array[currentTrial] = RT
+
 		resp[currentTrial] = "j"
 		$('#resp').val(resp)
 		respwindow = false;
@@ -154,6 +161,10 @@
 		if (!respwindow){
 			return;
 		}
+
+		var currentTime = new Date().getTime();
+		var RT = currentTime - startTrialTime;
+		rt_array[currentTrial] = RT
 
 		resp[currentTrial] = "k"
 		$('#resp').val(resp)
@@ -190,7 +201,8 @@
 
 			setTimeout(function(){$("#scrambled").hide();
 			                      $("#seconddisplay").show();
-			                  	  respwindow = true;}, 3500);
+			                  	  respwindow = true;
+			                  	  startDispTime = new Date().getTime();}, 3500);
 
 			setTimeout(function(){$("#seconddisplay").hide();}, 5500);
 
@@ -223,7 +235,8 @@
 
 		setTimeout(function(){$("#scrambled").hide();
 		                      $("#seconddisplay").show();
-		                      respwindow = true;}, 3500);
+		                      respwindow = true;
+		                	  startDispTime = new Date().getTime();}, 3500);
 
 		setTimeout(function(){$("#seconddisplay").hide();}, 5500);
 	}
