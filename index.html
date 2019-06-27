@@ -77,6 +77,10 @@
 	<p><b>Press the space bar to start.</b></p>
 </div>
 
+<div class = "textBox" id = "thankyou">
+		<p>Thank you for participating! Please close the window. </p>
+</div>
+
 <div id="scrambled" class="trialDiv">
 	<p><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"></p>
 </div> 
@@ -95,6 +99,7 @@
 
 <input type="hidden" id="subgender" name="subgender" value="">
 <input type="hidden" id="subage" name="subage" value="">
+<input type="hidden" id="resp" name="resp" value="">
 
 <script>
 	var sub_gender
@@ -112,6 +117,7 @@
 	var currentTrial = 0;
 	var data;
 	var respwindow = false;
+	var resp = new Array(18);
 
 	d3.csv("./sub_file/sub01.csv").then(function(subdata) {
 		data = subdata
@@ -132,15 +138,12 @@
 			return;
 		}
 
+		resp[currentTrial] = "j"
+		$('#resp').val(resp)
 		respwindow = false;
 
 		//$('#t' + currentTrial + 'response').val('j')
 		$("#seconddisplay").hide();
-
-		var input = document.createElement("input");
-		input.setAttribute("type", "hidden");
-		input.setAttribute("name", "resp"+currentTrial);
-		input.setAttribute("value", "j");
 
 		NextTrial();
 
@@ -152,15 +155,12 @@
 			return;
 		}
 
+		resp[currentTrial] = "k"
+		$('#resp').val(resp)
 		respwindow = false;
 
 		//$('#t' + currentTrial + 'response').val('k');
 		$("#seconddisplay").hide();
-
-		var input = document.createElement("input");
-		input.setAttribute("type", "hidden");
-		input.setAttribute("name", "resp"+currentTrial);
-		input.setAttribute("value", "k");
 
 		NextTrial();
 	}
@@ -168,30 +168,37 @@
 
 	function NextTrial(){
 
-		$('#fixation').show();
+		if (currentTrial < 18){
 
-		document.getElementById("img1_"+data[currentTrial].locy).src = data[currentTrial].first_pic;
-		document.getElementById("img1_"+data[currentTrial].loc2y).src = data[currentTrial].lure1;
-		document.getElementById("img1_"+data[currentTrial].loc3y).src = data[currentTrial].lure2;
+			currentTrial++;
 
-		document.getElementById('img2_'+data[currentTrial].locy).src = data[currentTrial].second_pic;
-		document.getElementById('img2_'+data[currentTrial].loc2y).src = "stimuli/scrambled.jpg";
-		document.getElementById('img2_'+data[currentTrial].loc3y).src = "stimuli/scrambled.jpg";
-				
-		setTimeout(function(){$("#fixation").hide();
-		                      $("#firstdisplay").show();}, 1000);
-				
-		setTimeout(function(){$("#firstdisplay").hide();
-						      $("#scrambled").show();}, 2500);
+			$('#fixation').show();
 
-		setTimeout(function(){$("#scrambled").hide();
-		                      $("#seconddisplay").show();
-		                  	  respwindow = true;}, 3500);
+			document.getElementById("img1_"+data[currentTrial].locy).src = data[currentTrial].first_pic;
+			document.getElementById("img1_"+data[currentTrial].loc2y).src = data[currentTrial].lure1;
+			document.getElementById("img1_"+data[currentTrial].loc3y).src = data[currentTrial].lure2;
 
-		setTimeout(function(){$("#seconddisplay").hide();}, 5500);
+			document.getElementById('img2_'+data[currentTrial].locy).src = data[currentTrial].second_pic;
+			document.getElementById('img2_'+data[currentTrial].loc2y).src = "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[currentTrial].loc3y).src = "stimuli/scrambled.jpg";
+					
+			setTimeout(function(){$("#fixation").hide();
+			                      $("#firstdisplay").show();}, 1000);
+					
+			setTimeout(function(){$("#firstdisplay").hide();
+							      $("#scrambled").show();}, 2500);
 
-		currentTrial++;
+			setTimeout(function(){$("#scrambled").hide();
+			                      $("#seconddisplay").show();
+			                  	  respwindow = true;}, 3500);
 
+			setTimeout(function(){$("#seconddisplay").hide();}, 5500);
+
+		}
+
+		else{
+			$('#thankyou').show();
+		}
 	}
 
 
@@ -223,12 +230,10 @@
 		currentTrial++;
 	}
 
+	function thankyou(){
 
-	function buttonClicked() {
-		$('#testtrial'+curTrial).hide();
-		curTrial++;
-		$('#testtrial'+curTrial).show();
 	}
+
 	$(document).ready(function(){
 		$('#start').click(showDemo);
 		$('#showinstructions').click(showInstructions);
