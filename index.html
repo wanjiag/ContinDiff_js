@@ -237,11 +237,11 @@
 		$('#instructions').hide();
 		$('#fixation').show();
 
-		document.getElementById("img1_"+data[0].locy).src = data[0].first_pic;
-		document.getElementById("img1_"+data[0].loc2y).src = data[0].lure1;
-		document.getElementById("img1_"+data[0].loc3y).src = data[0].lure2;
+		document.getElementById("img1_"+data[0].locy).src = weblink + data[0].first_pic;
+		document.getElementById("img1_"+data[0].loc2y).src = weblink + data[0].lure1;
+		document.getElementById("img1_"+data[0].loc3y).src = weblink + data[0].lure2;
 
-		document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
+		document.getElementById('img2_'+data[0].locy).src = weblink + data[0].second_pic;
 		document.getElementById('img2_'+data[0].loc2y).src = weblink + "stimuli/scrambled.jpg";
 		document.getElementById('img2_'+data[0].loc3y).src = weblink + "stimuli/scrambled.jpg";
 				
