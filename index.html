@@ -117,24 +117,6 @@
 
 	var weblink = 'https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/'
 
-    $(document).ready(function(){
-        $('#showinstructions').click(function(){
-        	sub_gender = $("input[name='gender']:checked").val();
-        	$('#subgender').val(sub_gender)
-        	sub_age = $("input[name='age']:checked").val()
-        	$('#subage').val(sub_age)
-        	sub_id = $("input[name='id']").val()
-        	$('#subid').val(sub_id)
-
-        	csv_file = weblink + "sub_file/sub"+sub_id+".csv"
-			d3.csv(csv_file).then(function(subdata) {
-			data = subdata
-	});
-
-
-        });
-    });
-
 	var currentTrial = 0;
 	var respwindow = false;
 	var startDispTime;
@@ -261,7 +243,29 @@
 
 	$(document).ready(function(){
 		$('#start').click(showDemo);
-		$('#showinstructions').click(showInstructions);
+
+        $('#showinstructions').click(function(){
+        	sub_gender = $("input[name='gender']:checked").val();
+        	sub_age = $("input[name='age']:checked").val()
+        	sub_id = $("input[name='id']").val()
+
+        	if (sub_gender && sub_age && sub_id){
+        		$('#subgender').val(sub_gender)
+        		$('#subage').val(sub_age)
+        		$('#subid').val(sub_id)
+
+        		csv_file = weblink + "sub_file/sub"+sub_id+".csv"
+				d3.csv(csv_file).then(function(subdata) {
+				data = subdata
+			})
+
+				showInstructions()
+        	}
+        	else{
+        		alert('Please answer all of the questions before moving on!');
+        	}
+        });
+
 		$(document).bind('keyup', 'space', showFirsttrial);
 		$(document).bind('keyup', 'j', pressedSame);
 		$(document).bind('keyup', 'k', pressedDiff);
