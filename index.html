@@ -87,11 +87,11 @@
 </div>
 
 <div id="scrambled" class="trialDiv">
-	<p><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"><img class="images" src="stimuli/scrambled.jpg"  width="300"></p>
+	<p><img class="images" src="https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/stimuli/scrambled.jpg"  width="300"><img class="images" src="https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/stimuli/scrambled.jpg"  width="300"><img class="images" src="https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/stimuli/scrambled.jpg"  width="300"></p>
 </div> 
 
 <div id="fixation" class="trialDiv">
-	<p><img class="images" src="stimuli/fixation.png"  width="30" left></p>
+	<p><img class="images" src="https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/stimuli/fixation.png"  width="30" left></p>
 </div> 
 
 <div id="firstdisplay" class="trialDiv">
@@ -115,6 +115,8 @@
 
 	var data;
 
+	var weblink = 'https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/'
+
     $(document).ready(function(){
         $('#showinstructions').click(function(){
         	sub_gender = $("input[name='gender']:checked").val();
@@ -124,7 +126,7 @@
         	sub_id = $("input[name='id']").val()
         	$('#subid').val(sub_id)
 
-        	csv_file = "./sub_file/sub"+sub_id+".csv"
+        	csv_file = weblink + "sub_file/sub"+sub_id+".csv"
 			d3.csv(csv_file).then(function(subdata) {
 			data = subdata
 	});
@@ -201,13 +203,13 @@
 
 			$('#fixation').show();
 
-			document.getElementById("img1_"+data[currentTrial].locy).src = data[currentTrial].first_pic;
-			document.getElementById("img1_"+data[currentTrial].loc2y).src = data[currentTrial].lure1;
-			document.getElementById("img1_"+data[currentTrial].loc3y).src = data[currentTrial].lure2;
+			document.getElementById("img1_"+data[currentTrial].locy).src = weblink + data[currentTrial].first_pic;
+			document.getElementById("img1_"+data[currentTrial].loc2y).src = weblink + data[currentTrial].lure1;
+			document.getElementById("img1_"+data[currentTrial].loc3y).src = weblink + data[currentTrial].lure2;
 
-			document.getElementById('img2_'+data[currentTrial].locy).src = data[currentTrial].second_pic;
-			document.getElementById('img2_'+data[currentTrial].loc2y).src = "stimuli/scrambled.jpg";
-			document.getElementById('img2_'+data[currentTrial].loc3y).src = "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[currentTrial].locy).src = weblink + [currentTrial].second_pic;
+			document.getElementById('img2_'+data[currentTrial].loc2y).src = weblink + "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[currentTrial].loc3y).src = weblink + "stimuli/scrambled.jpg";
 					
 			setTimeout(function(){$("#fixation").hide();
 			                      $("#firstdisplay").show();}, 1000);
@@ -240,8 +242,8 @@
 		document.getElementById("img1_"+data[0].loc3y).src = data[0].lure2;
 
 		document.getElementById('img2_'+data[0].locy).src = data[0].second_pic;
-		document.getElementById('img2_'+data[0].loc2y).src = "stimuli/scrambled.jpg";
-		document.getElementById('img2_'+data[0].loc3y).src = "stimuli/scrambled.jpg";
+		document.getElementById('img2_'+data[0].loc2y).src = weblink + "stimuli/scrambled.jpg";
+		document.getElementById('img2_'+data[0].loc3y).src = weblink + "stimuli/scrambled.jpg";
 				
 		setTimeout(function(){$("#fixation").hide();
 		                      $("#firstdisplay").show();}, 1000);
