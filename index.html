@@ -43,7 +43,7 @@
 
 
 <div class = "textBox" id = "welcome">
-	<p>Welcome to the experiment!</p>
+	<p>Welcome to the experiment! Please do not hit the submit button until you are instructed to do so.</p>
 	</br>
 	<a href="#" id="start">Start</a>
 </div>
@@ -83,7 +83,7 @@
 </div>
 
 <div class = "textBox" id = "thankyou">
-		<p>Thank you for participating! Please close the window. </p>
+		<p>Thank you for participating! Please hit the submit button and close the window. </p>
 </div>
 
 <div id="scrambled" class="trialDiv">
@@ -203,7 +203,8 @@
 			                  	  respwindow = true;
 			                  	  startDispTime = new Date().getTime();}, 3500);
 
-			setTimeout(function(){$("#seconddisplay").hide();}, 5500);
+			setTimeout(function(){$("#seconddisplay").hide();
+								  $("#fixation").show();}, 5500);
 
 		}
 
@@ -241,7 +242,8 @@
 			                      respwindow = true;
 			                	  startDispTime = new Date().getTime();}, 3500);
 
-			setTimeout(function(){$("#seconddisplay").hide();}, 5500);
+			setTimeout(function(){$("#seconddisplay").hide();
+								  $("#fixation").show();}, 5500);
 
 		} 
 	}
