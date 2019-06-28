@@ -112,12 +112,11 @@
 	var sub_gender
 	var sub_age
 	var sub_id
-
-	var data;
-
 	var weblink = 'https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/'
 
+	var data;
 	var currentTrial = 0;
+	var startexp = true;
 	var respwindow = false;
 	var startDispTime;
 	var resp = new Array(18);
@@ -216,29 +215,35 @@
 
 	function showFirsttrial(){
 
-		$('#instructions').hide();
-		$('#fixation').show();
+		if (startexp){
 
-		document.getElementById("img1_"+data[0].locy).src = weblink + data[0].first_pic;
-		document.getElementById("img1_"+data[0].loc2y).src = weblink + data[0].lure1;
-		document.getElementById("img1_"+data[0].loc3y).src = weblink + data[0].lure2;
+			startexp = false;
 
-		document.getElementById('img2_'+data[0].locy).src = weblink + data[0].second_pic;
-		document.getElementById('img2_'+data[0].loc2y).src = weblink + "stimuli/scrambled.jpg";
-		document.getElementById('img2_'+data[0].loc3y).src = weblink + "stimuli/scrambled.jpg";
-				
-		setTimeout(function(){$("#fixation").hide();
-		                      $("#firstdisplay").show();}, 1000);
-				
-		setTimeout(function(){$("#firstdisplay").hide();
-						      $("#scrambled").show();}, 2500);
+			$('#instructions').hide();
+			$('#fixation').show();
 
-		setTimeout(function(){$("#scrambled").hide();
-		                      $("#seconddisplay").show();
-		                      respwindow = true;
-		                	  startDispTime = new Date().getTime();}, 3500);
+			document.getElementById("img1_"+data[0].locy).src = weblink + data[0].first_pic;
+			document.getElementById("img1_"+data[0].loc2y).src = weblink + data[0].lure1;
+			document.getElementById("img1_"+data[0].loc3y).src = weblink + data[0].lure2;
 
-		setTimeout(function(){$("#seconddisplay").hide();}, 5500);
+			document.getElementById('img2_'+data[0].locy).src = weblink + data[0].second_pic;
+			document.getElementById('img2_'+data[0].loc2y).src = weblink + "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[0].loc3y).src = weblink + "stimuli/scrambled.jpg";
+					
+			setTimeout(function(){$("#fixation").hide();
+			                      $("#firstdisplay").show();}, 1000);
+					
+			setTimeout(function(){$("#firstdisplay").hide();
+							      $("#scrambled").show();}, 2500);
+
+			setTimeout(function(){$("#scrambled").hide();
+			                      $("#seconddisplay").show();
+			                      respwindow = true;
+			                	  startDispTime = new Date().getTime();}, 3500);
+
+			setTimeout(function(){$("#seconddisplay").hide();}, 5500);
+
+		} 
 	}
 
 	$(document).ready(function(){
