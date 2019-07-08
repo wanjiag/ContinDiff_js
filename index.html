@@ -11,6 +11,7 @@
 	padding-left: 0px;
 	width: 960px;
 	margin: 0 auto;
+	margin-bottom: 1000px;
 }
 .textBox{
 	display: none;
@@ -20,6 +21,7 @@
 	margin: 0 auto;
 	font-family: Arial, Helvetica;
 	font-size: 15pt;
+	margin-bottom: 1000px;
 }
 .images{
 	display:inline-block;
@@ -37,6 +39,10 @@
 	padding-left: 0px;
 	width: 300px;
 	margin: 0 auto;
+	margin-bottom: 1000px;
+}
+#thankyou{
+	margin-bottom: 0px;
 }
 </style>
 
@@ -76,13 +82,14 @@
 	<p>In this experiment, 3 pictures will appear on the screen. Please try your best to memorize these 3 pictures. Then, 3 scrambled pictures will appear and take place of the 3 pictures. Lastly, one of the 3 scrambled pictures will change into a new picture, and you will need to judge whether the picture is the same or different from the previous picture that was on the same place.</p>
 	<p>If the picture is <strong>the same</strong>, press the letter J.</p>
 	<p>If the picture is <strong>different</strong>, press the letter K.</p>
+	<p>After you respond, the next round of pictures will show up automatically.</p>
 	</br>
 	</br>
-	<p><b>Press the space bar to start.</b></p>
+	<p><b>Press "F" to start.</b></p>
 </div>
 
 <div class = "textBox" id = "thankyou">
-		<p>Thank you for participating! Please hit the submit button and close the window. </p>
+		<p>Thank you for participating! Please hit the submit button. </p>
 </div>
 
 <div id="scrambled" class="trialDiv">
@@ -132,10 +139,15 @@
 	}
 
 	function pressedSame(){
-
+	    
 		if (!respwindow){
 			return;
 		}
+		if ($('#fixation').is(":visible")){
+	        $('#fixation').hide();
+	    }
+
+		respwindow = false;
 
 		var currentTime = new Date().getTime();
 		var RT = currentTime - startDispTime;
@@ -144,7 +156,6 @@
 
 		resp[currentTrial] = "j"
 		$('#resp').val(resp)
-		respwindow = false;
 
 		//$('#t' + currentTrial + 'response').val('j')
 		$("#seconddisplay").hide();
@@ -154,10 +165,16 @@
 	}
 
 	function pressedDiff(){
-
+	    
 		if (!respwindow){
 			return;
 		}
+		
+		if ($('#fixation').is(":visible")){
+	        $('#fixation').hide();
+	    }
+	    
+	    respwindow = false;
 
 		var currentTime = new Date().getTime();
 		var RT = currentTime - startDispTime;
@@ -166,7 +183,7 @@
 
 		resp[currentTrial] = "k"
 		$('#resp').val(resp)
-		respwindow = false;
+		
 
 		//$('#t' + currentTrial + 'response').val('k');
 		$("#seconddisplay").hide();
@@ -203,7 +220,11 @@
 			                  	  startDispTime = new Date().getTime();}, 3500);
 
 			setTimeout(function(){$("#seconddisplay").hide();
-								  }, 5500);
+			                      if ($('#fixation').is(":hidden") && $('#firstdisplay').is(":hidden") && $('#scrambled').is(":hidden") && currentTrial < 17){
+			                          $('#fixation').show();
+			                      };
+			    
+			}, 5500);
 
 		}
 
@@ -242,7 +263,11 @@
 			                	  startDispTime = new Date().getTime();}, 3500);
 
 			setTimeout(function(){$("#seconddisplay").hide();
-								  }, 5500);
+			                      if ($('#fixation').is(":hidden") && $('#firstdisplay').is(":hidden") && $('#scrambled').is(":hidden")){
+			                          $('#fixation').show();
+			                      };			                      
+			    
+			}, 5500);
 
 		} 
 	}
@@ -272,7 +297,7 @@
         	}
         });
 
-		$(document).bind('keyup', 'space', showFirsttrial);
+		$(document).bind('keyup', 'f', showFirsttrial);
 		$(document).bind('keyup', 'j', pressedSame);
 		$(document).bind('keyup', 'k', pressedDiff);
 		//$('.responseButton').click(buttonClicked);
