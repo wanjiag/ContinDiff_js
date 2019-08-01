@@ -3,7 +3,7 @@ import random
 import os
 import numpy as np
 
-for sub in range(1, 21):
+for sub in range(21, 51):
 
     num = list(range(1, 19))
     random.shuffle(num)
@@ -24,7 +24,7 @@ for sub in range(1, 21):
 
     first_pic = []
     second_pic = []
-    key = [] # change = 'j', no change = 'k'
+    key = [] # same = 'j', different = 'k'
 
     count = 0
     for i in list_a_first:
@@ -32,18 +32,18 @@ for sub in range(1, 21):
             first_pic.append(list_a[count])
             if change[count] == 0:
                 second_pic.append(list_a[count])
-                key.append('k')
+                key.append('j')
             else:
                 second_pic.append(list_b[count])
-                key.append('j')
+                key.append('k')
         else:
             first_pic.append(list_b[count])
             if change[count] == 0:
                 second_pic.append(list_b[count])
-                key.append('k')
+                key.append('j')
             else:
                 second_pic.append(list_a[count])
-                key.append('j')
+                key.append('k')
         count += 1
 
     locy = []
