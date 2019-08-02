@@ -2,8 +2,11 @@ import pandas as pd
 import random
 import os
 import numpy as np
+import os
 
-for sub in range(21, 51):
+cwd = os.getcwd()
+
+for sub in range(1, 51):
 
     num = list(range(1, 19))
     random.shuffle(num)
@@ -18,7 +21,7 @@ for sub in range(21, 51):
 
     change = np.random.randint(0, 2, size=18)
 
-    location = np.random.randint(0, 3, size=18)
+    location = [1, 2, 3]
 
     list_a_first = np.random.randint(0, 2, size=18)
 
@@ -50,19 +53,11 @@ for sub in range(21, 51):
     loc2y = []
     loc3y = []
 
-    for j in location:
-        if j == 0:
-            locy.append(-400)
-            loc2y.append(0)
-            loc3y.append(400)
-        if j == 1:
-            locy.append(0)
-            loc2y.append(-400)
-            loc3y.append(400)
-        if j == 2:
-            locy.append(400)
-            loc2y.append(0)
-            loc3y.append(-400)
+    for j in range(len(num)):
+        random.shuffle(location)
+        locy.append(location[0])
+        loc2y.append(location[1])
+        loc3y.append(location[2])
 
     output = {'first_pic': first_pic,
               'second_pic': second_pic,
@@ -71,13 +66,10 @@ for sub in range(21, 51):
               'loc2y': loc2y,
               'lure2': lure2,
               'loc3y': loc3y,
-              'location': location,
               'change': change,
               'key': key}
 
     output = pd.DataFrame(output)
 
-    data_folder = 'C:/Users/Wanjia/OneDrive - University Of Oregon/Desktop/ContinDiff_js/sub_file'
-
-    output_path = os.path.join(data_folder, 'sub{:02d}.csv'.format(sub))
+    output_path = os.path.join(cwd, 'sub_file', 'sub{:02d}.csv'.format(sub))
     output.to_csv(output_path, index=True, index_label='index')
