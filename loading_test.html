@@ -1,0 +1,529 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://timbrady.org/turk/TimTurkTools.js"></script>
+
+<style type="text/css">
+.trialDiv{
+	display: none;
+	border: 1px solid white;
+	border-color: read;
+	border-width: 1px;
+	padding-left: 0px;
+	width: 960px;
+	margin: 0 auto;
+	margin-bottom: 1000px;
+}
+.textBox{
+	display: none;
+	border: 1px solid white;
+	padding-left: 20px;
+	width: 500px;
+	margin: 0 auto;
+	font-family: Arial, Helvetica;
+	font-size: 15pt;
+	margin-bottom: 1000px;
+}
+.images{
+	display:inline-block;
+	margin-left:10px;
+	margin-right:10px;
+}
+#welcome{
+	display: block;
+}
+#fixation{
+	display: none;
+	border: 1px solid white;
+	border-color: read;
+	border-width: 1px;
+	padding-left: 0px;
+	width: 300px;
+	margin: 0 auto;
+	margin-bottom: 1000px;
+}
+#consent{
+	display: none;
+	border: 1px solid white;
+	padding-left: 20px;
+		width: 1000px;
+	margin: 0 auto;
+	font-family: Arial, Helvetica;
+	font-size: 15pt;
+	margin-bottom: 1000px;
+}
+#correct{
+    display: none;
+	border: 1px solid white;
+	margin: 0 auto;
+	padding-top: 135px;
+	width: 100px;
+	font-family: Arial, Helvetica;
+	font-size: 15pt;
+	margin-bottom: 1000px;
+}
+#incorrect{
+    display: none;
+	border: 1px solid white;
+	margin: 0 auto;
+	padding-top: 135px;
+	width: 100px;
+	font-family: Arial, Helvetica;
+	font-size: 15pt;
+	margin-bottom: 1000px;
+}
+#thankyou{
+	display: none;
+	border: 1px solid white;
+	padding-left: 20px;
+	width: 1000px;
+	margin: 0 auto;
+	font-family: Arial, Helvetica;
+	font-size: 15pt;
+	margin-bottom: 10px;
+}
+</style>
+
+
+<div class = "textBox" id = "welcome">
+	<p>Welcome to the experiment!</p>
+	<p><strong>Please only accept the hit if your age is between 18 and 35!</strong></p>
+	<p>Please do not hit the submit button until you are instructed to do so.</p>
+	</br>
+	<a href="#" id="start">Start</a>
+</div>
+
+<div class = "textBox" id = "consent">
+    
+    <p><strong>We need your consent to continue.</strong></p>
+    
+	<p>University of Oregon</p>
+	<p>Faculty of Arts and Science</p>
+	<p>Department of Psychology </p>
+	</br>
+	<p>Brice Kuhl Ph.D., Assistant Professor</p>
+	<p>Department of Psychology</p>
+	<p>1227 University of Oregon</p>
+	<p>Eugene, OR 97403</p>
+	<p>Email: bkuhl@uroegon.edu</p>
+	</br>
+	
+	
+    <p><strong>Mechanical Turk Consent Form</strong></p>
+    <p>You have been invited to take part in a research study named <strong>Memory Strategies</strong>. 
+    The study is designed to investigate your ability to form and retrieve memories. 
+    It will be conducted by Dr. Brice Kuhl, who is the principal investigator, 
+    in the Department of Psychology at University of Oregon.</p>
+
+    <p><strong>Procedure</strong></p>
+    <p>If you agree to be in this study, you will be asked to look at pictures 
+    (e.g., geometric figures, faces, or photographs of everyday objects) presented 
+    on a computer display and make judgments about them. Participation in this study will take between 5-60 minutes
+    to complete and you will receive between $1.00 and $10.00 for your participation. 
+    The specific experiment duration and payment amount will be indicated at the beginning of the experiment as well as below. 
+    Please note, compensation from participation in the Human Subjects Research studies is taxable income. 
+    If your compensation totals $600 or more in a calendar year, the University is required to report the income to the IRS. 
+    The University requires its departments to track participant compensation and may contact you to complete a Form W-9 
+    for tax reporting purposes. Because of the federal and University tracking requirements, your name will be associated with 
+    participation in research. Department and University administrators will have access to this information, 
+    but will not have access to research data. This research is funded by the National Institutes of Health 
+    (Institute of Neurological Disorders and Stroke) grants R01NS089729 and R01NS107727, the National Science Foundation 
+    CAREER Award BCS-1752921, and/or Dr. Brice Kuhl’s Startup Fund granted by University of Oregon.</p>
+
+    <p>When you complete the study, a thorough written explanation of it will be provided. 
+    In addition, by agreeing to participate, you understand you must be 18 years or older to participate.</p>
+
+    <p><strong>Expected Duration and Compensation</strong>: This study will take _less than 5_ minutes. You will receive _$1_ for your full participation.</p>
+
+    <p><strong>Risks and Benefits</strong></p>
+    <p>There are no known health risks associated with your participation in this research beyond those of 
+    everyday life. Although you will receive no direct benefits, this research may help us better understand how people identify, 
+    recognize, and think about different types of stimuli.</p>
+
+    <p><strong>Rights</strong></p>
+    <p>Participation in this study is voluntary. You may refuse to participate or withdraw at any time without penalty. 
+    You also have the right to skip or not answer any questions you prefer not to answer.</p>
+
+    <p>If there is anything about the study or your participation that is unclear or that you do not understand, 
+    or if you have questions or wish to report a research-related problem, you may contact Brice Kuhl at the Department of Psychology, 
+    1227 University of Oregon, by email (bkuhl@uoregon.edu). For questions about your rights as a research participant, 
+    you may contact Research Compliance Services (RCS) at 677 East 12th Ave, Suite 500, Eugene, OR 97403 by phone at (541) 346-2510 
+    or by email at ResearchCompliance@uroegon.edu. </p>
+
+    <p><strong>Confidentiality</strong></p>
+    <p>Any information that is obtained in connection with this study will be stored in computer files under an arbitrary identification code. 
+    Because your name or other identifying information will not be collected, there will be no link between your data and the identification code. 
+    The overall results of these studies may be published but, again, your name will not be used and your identity will not be revealed anywhere in these publications. 
+    Your research records will be kept on file electronically in a secure location and will be saved indefinitely and 
+    later possibly stored in a secure online storage facility. These files will only be accessible to Dr. Brice Kuhl and his research associates.</p>
+
+    <p>Please print a copy of this consent document to keep.</p>
+
+	
+	<input type="button" value="Print" onclick="window.print()" />
+	
+	</br>
+
+	<p>If you cannot see the "I agree" buttion, that means the pictures for the experiment are loading currently. Please take your time to read the consent form. The "I Agree" button will show up shortly.</p>
+
+	<p><a href="#" id="agree">I AGREE</a></p>
+	<p>NO THANK YOU (Please close the page or hit the return button at bottom right)</p>
+	
+</div>
+
+<div class = "textBox" id = "demographic">
+	<p>Before we begin, please complete the following demographic information: </p>
+
+	</br>
+	<p>Gender:</p>
+	<p><input type="radio" class="demoButton" name="gender" value="1">Male 
+		<input type="radio" class="demoButton" name="gender" value="2">Female
+		<input type="radio" class="demoButton" name="gender" value="3">Prefer not to answer </p>
+	</br>
+	<p>Age:</p>
+	<p>	<input type="radio" class="demoButton" name="age" value="1">18-25 
+	    <input type="radio" class="demoButton" name="age" value="2">26-30 
+		<input type="radio" class="demoButton" name="age" value="3">31-35</p>
+	<p><strong>Please close the window if your age is not between 18 and 35!</strong></p>
+	</br>
+	</br>
+	<a href="#" id="showinstructions">Continue.</a>
+</div>
+
+<div class = "textBox" id = "instructions">
+	<p>Thank you for participating! Before we begin, please make sure you are in a quiet location where you will not be distracted or disturbed for the next 5 minutes. Please close other windows. The experiment runs fastest when other programs are closed. </p>
+	<p>In this experiment, 3 pictures will appear on the screen. Please try your best to memorize these 3 pictures. 
+	Then, 3 white noisy pictures will appear instead. 
+	Lastly, one of the 3 white noisy pictures will change into a either exactly the same or slighly different picture compared with the previous pictures you saw, before the white noisy pictures.
+	You will need to indicate whether the second picture is the same or different from the previous picture that was at the same place.</p>
+	<p>If the picture is <strong>the same</strong>, press the letter J.</p>
+	<p>If the picture is <strong>different</strong>, press the letter K.</p>
+	<p>The next round of pictures will only show up after you respond.</p>
+	</br>
+	<p><b>Press "F" to start.</b></p>
+</div>
+
+<div class = "textBox" id = "correct">
+    <p>CORRECT</p>
+</div>
+
+<div class = "textBox" id = "incorrect">
+    <p>INCORRECT</p>
+</div>
+
+<div class = "textBox" id = "thankyou">
+	<p><strgong>Thank you for participating! Please click the submit button at the bottom of the page.</strgong></p>
+		
+	<p>University of Oregon</p>
+	<p>Faculty of Arts and Science</p>
+	<p>Department of Psychology </p>
+	<p>Brice Kuhl Ph.D., Assistant Professor</p>
+	<p>Department of Psychology</p>
+	<p>1227 University of Oregon</p>
+	<p>Eugene, OR 97403</p>
+	<p>Email: bkuhl@uroegon.edu</p>
+	</br>
+	
+	<p><strong>Debriefing Statement (Behavioral Study)</strong></p>
+	<p>Background: Although our brains store countless memories and we form new memories every day, 
+	we also forget many of our experiences and suffer many memory confusions. 
+	These lapses in memory can be partly explained by failures to effectively encode our experiences and partly by failures to effectively retrieve our experiences. 
+	When we retrieve an event from memory, we try to recreate the event that was encoded. 
+	In some cases, retrieving a memory can help us better remember it later. 
+	However, if details of the memory are not retrieved accurately, it can result in later memory confusion or forgetting.</p>
+	<p>Purpose of this study: The goal of this study is to develop an understanding of when and why memory 
+	failures and confusions occur. By having participants encode/retrieve memories, 
+	and then evaluating how accurately these memories are recalled, we can assess how retrieval affects memory detail and accuracy. 
+	Understanding these dynamics will yield fundamental insight into the brain and will also give us a better 
+	understanding of how and why memory lapses and errors sometimes occur.</p>
+	<p>Your part: We had you memorize picture-picture pairs, 
+	and then try to recall some of pictures that you saw. 
+	During the experiment, you made various responses to indicate your success in retrieving the memories. 
+	You were then tested on how accurately you remembered the images. 
+	From this, we hope to learn how retrieving memories affects the accuracy of memory details.</p>
+	<p>Feedback and further information: If you have additional questions about this study, 
+	please feel free to ask the experimenter. You may also email the Principal Investigator, Dr. Brice Kuhl, at bkuhl@uoregon.edu. 
+	If you have any questions concerning your rights as a research participant, please contact Research Compliance Services, 
+	5237 University of Oregon, Eugene, OR 97403, (541) 346-2510, or email ResearchCompliance@uoregon.edu. 
+	You can also email the Human Subjects Coordinator for Psychology and Linguistics research at hscoord@uoregon.edu.</p>
+
+	<p>Thank you again for your participation! </p>
+	<p>Please leave your comments, thoughts or questions here:</p>
+	<form>
+	<input type="text" name="comments"><br>
+	</form>
+
+</div>
+
+<div id="scrambled" class="trialDiv">
+	<p><img class="images" src="https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/stimuli/scrambled.jpg"  width="300"><img class="images" src="https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/stimuli/scrambled.jpg"  width="300"><img class="images" src="https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/stimuli/scrambled.jpg"  width="300"></p>
+</div> 
+
+<div id="fixation" class="trialDiv">
+	<p><img class="images" src="https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/stimuli/fixation.png"  width="300" left></p>
+</div> 
+
+<div id="firstdisplay" class="trialDiv">
+	<p><img class="images" id = "img1_1" width="300"><img class="images" id = "img1_2" width="300"><img class="images" id="img1_3" width="300"></p>
+</div> 
+
+<div id="seconddisplay" class="trialDiv">
+	<p><img class="images" id = "img2_1" width="300"><img class="images" id = "img2_2" width="300"><img class="images" id="img2_3" width="300"></p>
+</div> 
+
+<input type="hidden" id="subgender" name="subgender" value="">
+<input type="hidden" id="subage" name="subage" value="">
+<input type="hidden" id="subid" name="subid" value="">
+<input type="hidden" id="resp" name="resp" value="">
+<input type="hidden" id="rt0" name="rt0" value="">
+<input type="hidden" id="rt1" name="rt1" value="">
+<input type="hidden" id="rt2" name="rt2" value="">
+<input type="hidden" id="rt3" name="rt3" value="">
+<input type="hidden" id="rt4" name="rt4" value="">
+<input type="hidden" id="rt5" name="rt5" value="">
+<input type="hidden" id="rt6" name="rt6" value="">
+<input type="hidden" id="rt7" name="rt7" value="">
+<input type="hidden" id="rt8" name="rt8" value="">
+<input type="hidden" id="rt9" name="rt9" value="">
+<input type="hidden" id="rt10" name="rt10" value="">
+<input type="hidden" id="rt11" name="rt11" value="">
+<input type="hidden" id="rt12" name="rt12" value="">
+<input type="hidden" id="rt13" name="rt13" value="">
+<input type="hidden" id="rt14" name="rt14" value="">
+<input type="hidden" id="rt15" name="rt15" value="">
+<input type="hidden" id="rt16" name="rt16" value="">
+<input type="hidden" id="rt17" name="rt17" value="">
+<input type="hidden" id="comments" name="comments" value="">
+
+<script>
+	var sub_gender;
+	var sub_age;
+	var sub_id;
+	var weblink = 'https://raw.githubusercontent.com/wanjiag/ContinDiff_js/master/';
+
+	var data;
+	var currentTrial = 0;
+	var imgCount = 0;
+	var first_pics = new Array(trialNum);
+	var second_pics = new Array(trialNum);
+	var lure1 = new Array(trialNum);
+	var lure2 = new Array(trialNum);
+	
+	var startexp = true;
+	var respwindow = false;
+	var startDispTime;
+	var trialNum = 18;
+	var resp = new Array(trialNum);
+	var rt_array = new Array(trialNum);
+	
+	function showConsent(){
+            $('#consent').show();
+		    $('#welcome').hide();
+        }
+
+	function showDemo(){
+	    //if (IsTurkPreview()) {
+	    a = false;
+	    if (a) {
+        	    alert('Please accpet the hit before moving on!')
+        }else{
+            $('#demographic').show();
+		    $('#consent').hide();
+        }
+	}
+	
+	function showInstructions(){
+		$('#instructions').show();
+		$('#demographic').hide();
+	}
+
+	function pressedJ(){
+	    
+		if (!respwindow){
+			return;
+		}
+
+		respwindow = false;
+
+		var currentTime = new Date().getTime();
+		var RT = currentTime - startDispTime;
+		$('#rt'+currentTrial).val(RT)
+
+		resp[currentTrial] = "j"
+		$('#resp').val(resp)
+
+		$("#seconddisplay").hide();
+		
+		if (data[currentTrial].key == 'j'){
+		    $("#correct").show();
+		    setTimeout(function(){$("#correct").hide();}, 500);
+		}else{
+		    $("#incorrect").show();
+		    setTimeout(function(){$("#incorrect").hide();}, 500);
+		}
+
+		NextTrial();
+
+	}
+
+	function pressedK(){
+	    
+		if (!respwindow){
+			return;
+		}
+	    
+	    respwindow = false;
+
+		var currentTime = new Date().getTime();
+		var RT = currentTime - startDispTime;
+		$('#rt'+currentTrial).val(RT)
+
+		resp[currentTrial] = "k";
+		$('#resp').val(resp);
+		
+		$("#seconddisplay").hide();
+		
+		if (data[currentTrial].key == 'k'){
+		    $("#correct").show();
+		    setTimeout(function(){$("#correct").hide();}, 500);
+		}else{
+		    $("#incorrect").show();
+		    setTimeout(function(){$("#incorrect").hide();}, 500);
+		}
+
+		NextTrial();
+	}
+
+
+	function NextTrial(){
+
+		currentTrial++;
+
+		if (currentTrial < 18){
+
+			$('#fixation').show();
+
+			document.getElementById("img1_"+data[currentTrial].locy).src = weblink + data[currentTrial].first_pic;
+			document.getElementById("img1_"+data[currentTrial].loc2y).src = weblink + data[currentTrial].lure1;
+			document.getElementById("img1_"+data[currentTrial].loc3y).src = weblink + data[currentTrial].lure2;
+
+			document.getElementById('img2_'+data[currentTrial].locy).src = weblink + data[currentTrial].second_pic;
+			document.getElementById('img2_'+data[currentTrial].loc2y).src = weblink + "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[currentTrial].loc3y).src = weblink + "stimuli/scrambled.jpg";
+					
+			setTimeout(function(){$("#fixation").hide();
+			                      $("#firstdisplay").show();}, 1000);
+					
+			setTimeout(function(){$("#firstdisplay").hide();
+							      $("#scrambled").show();},3000);
+
+			setTimeout(function(){$("#scrambled").hide();
+			                      $("#seconddisplay").show();
+			                  	  respwindow = true;
+			                  	  startDispTime = new Date().getTime();}, 4000);
+		}
+
+		else{
+			$('#thankyou').show();
+		}
+	}
+
+
+	function showFirsttrial(){
+
+		if (startexp){
+
+			startexp = false;
+
+			$('#instructions').hide();
+			$('#fixation').show();
+
+			document.getElementById("img1_"+data[0].locy).src = first_pics[0];
+			document.getElementById("img1_"+data[0].loc2y).src = weblink + data[0].lure1;
+			document.getElementById("img1_"+data[0].loc3y).src = weblink + data[0].lure2;
+
+			document.getElementById('img2_'+data[0].locy).src = weblink + data[0].second_pic;
+			document.getElementById('img2_'+data[0].loc2y).src = weblink + "stimuli/scrambled.jpg";
+			document.getElementById('img2_'+data[0].loc3y).src = weblink + "stimuli/scrambled.jpg";
+					
+			setTimeout(function(){$("#fixation").hide();
+			                      $("#firstdisplay").show();}, 1000);
+					
+			setTimeout(function(){$("#firstdisplay").hide();
+							      $("#scrambled").show();}, 3000);
+
+			setTimeout(function(){$("#scrambled").hide();
+			                      $("#seconddisplay").show();
+			                      respwindow = true;
+			                	  startDispTime = new Date().getTime();}, 4000);
+		} 
+	}
+	
+	function preloadImage(imgCount){
+
+		first_pics[imgCount]=new Image();
+		first_pics[imgCount].src=weblink + data[imgCount].first_pic;
+
+    	second_pics[imgCount]=new Image();
+    	second_pics[imgCount].src=weblink + data[imgCount].second_pic;
+
+    	lure1[imgCount]=new Image();
+    	lure1[imgCount].src=weblink + data[imgCount].lure1;
+
+    	lure2[imgCount]=new Image();
+    	lure2[imgCount].src=weblink + data[imgCount].lure2;
+
+	}
+
+	function loadImage(){
+
+		$('#agree').hide();
+
+	    while (imgCount < trialNum){
+	    	preloadImage(imgCount);
+	    	imgCount ++;
+	    }
+
+	    if (imgCount == trialNum){
+	    	alert("finish loading pictures");
+	    	alert(first_pics);
+	    	$('#agree').show();
+	    }
+	}
+
+	$(document).ready(function(){
+	    
+	    sub_id = Math.floor(Math.random() * (50 - 1 +1)) + 1;
+		sub_id = ("0" + sub_id).slice(-2);
+		$('#subid').val(sub_id);
+
+        csv_file = weblink + "sub_file/sub"+sub_id+".csv"
+		d3.csv(csv_file).then(function(subdata) {
+				data = subdata;
+			})
+
+		$('#start').click(showConsent);
+		$('#start').click(loadImage);
+
+		$('#agree').click(showDemo);
+		
+		$('#showinstructions').click(function(){
+        	sub_gender = $("input[name='gender']:checked").val();
+        	sub_age = $("input[name='age']:checked").val()
+
+		    if (sub_gender && sub_age){
+        		    $('#subgender').val(sub_gender);
+        		    $('#subage').val(sub_age);
+        		    
+        		    showInstructions();
+			}else{
+			        alert('Please answer both questions before moving on!');
+			    }
+        });
+
+		$(document).bind('keyup', 'f', showFirsttrial);
+		$(document).bind('keyup', 'j', pressedJ);
+		$(document).bind('keyup', 'k', pressedK);
+	});
+
+</script>
+</crowd-form>
